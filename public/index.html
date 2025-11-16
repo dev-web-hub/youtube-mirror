@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Mirror — Vertical Feed</title>
+  <style>
+    body { margin:0; background:#000; }
+    .video {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 9/16;
+      margin: 0 auto 40px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<script>
+async function loadFeed() {
+  const res = await fetch("/clips/");
+  const text = await res.text();
+  const files = [...text.matchAll(/href="([^"]+_VT\.mp4)"/g)].map(m => m[1]);
+
+  files.forEach(f => {
+    const v = document.createElement("video");
+    v.src = "/clips/" + f;
+    v.loop = true;
+    v.autoplay = true;
+    v.muted = true;
+    v.playsInline = true;
+    v.className = "video";
+    document.body.appendChild(v);
+  });
+}
+loadFeed();
+</script>
+</body>
+</html>

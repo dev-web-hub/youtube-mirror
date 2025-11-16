@@ -1,0 +1,10 @@
+services:
+  - type: static
+    name: youtube_mirror
+    env: static
+    buildCommand: "echo Building youtube_mirror"
+    staticPublishPath: "public"
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
