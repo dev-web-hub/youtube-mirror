@@ -1,0 +1,29 @@
+{
+  "id": "cc_4001",
+  "brand": "cubecast",
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Chess Game 4001",
+      "subtitle": "Auto-generated ASMR replay layout"
+    },
+    {
+      "type": "video_player",
+      "src": "https://example.com/chess4001.mp4",
+      "autoplay": false
+    },
+    {
+      "type": "product_grid",
+      "heading": "Chess Resources",
+      "items": [
+        { "title": "Opening Guide", "price": "$12" },
+        { "title": "Endgame Manual", "price": "$15" }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Play Again",
+      "href": "https://cubecast.app/game/4001"
+    }
+  ]
+}

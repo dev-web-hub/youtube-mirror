@@ -1,0 +1,12 @@
+{
+  "id": "dd_41459",
+  "brand": "deluxedeals",
+  "blocks": [
+    { "type": "hero", "title": "Deluxe Deal 41459", "subtitle": "Generated automatically" },
+    { "type": "product_grid", "heading": "Featured Offers", "items": [
+      { "title": "Deal A", "price": "$25" },
+      { "title": "Deal B", "price": "$35" }
+    ]},
+    { "type": "cta_button", "label": "Shop", "href": "https://deluxedeals.net/offer/41459" }
+  ]
+}

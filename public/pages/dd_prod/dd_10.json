@@ -1,0 +1,12 @@
+{
+  "id": "dd_10",
+  "brand": "deluxedeals.net",
+  "blocks": [
+    { "type": "hero", "title": "deluxedeals.net Page 10", "subtitle": "Sample auto-generated page" },
+    { "type": "product_grid", "heading": "Featured", "items": [
+      { "title": "Item A", "price": "/Users/christianboullard/mah-relay-engine/public/pages/prod0" },
+      { "title": "Item B", "price": "dd0" }
+    ]},
+    { "type": "cta_button", "label": "Visit", "href": "https://deluxedeals.net/offer/10" }
+  ]
+}

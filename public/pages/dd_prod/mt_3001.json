@@ -1,0 +1,21 @@
+{
+  "id": "mt_3001",
+  "brand": "maxtube",
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Doomscroll Episode 3001",
+      "subtitle": "Vertical reel auto-rendered by relay engine"
+    },
+    {
+      "type": "video_player",
+      "src": "https://example.com/video3001.mp4",
+      "autoplay": false
+    },
+    {
+      "type": "cta_button",
+      "label": "Watch More",
+      "href": "https://maxtube.app/video/3001"
+    }
+  ]
+}

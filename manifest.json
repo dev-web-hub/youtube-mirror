@@ -1,7 +1,0 @@
-{
-  "site": "youtube_mirror",
-  "description": "Staged Render site for youtube_mirror",
-  "render_base_url": null,
-  "deploy_hook": null,
-  "last_sync": null
-}

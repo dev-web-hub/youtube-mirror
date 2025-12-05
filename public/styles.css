@@ -1,0 +1,112 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #020617;
+  color: #e5e7eb;
+  min-height: 100vh;
+}
+
+/* Header + footer */
+.rel-header, .rel-footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.rel-header h1 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a5b4fc;
+}
+
+.rel-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.rel-debug {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Root container */
+.rel-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 16px 32px;
+}
+
+/* Blocks */
+.rel-block {
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 10px 0;
+  background: radial-gradient(circle at top left, #020617 0, #020617 40%, #030712 100%);
+  border: 1px solid #111827;
+}
+
+/* Hero */
+.rel-hero-title { margin: 0 0 6px; font-size: 24px; }
+.rel-hero-subtitle { margin: 0; font-size: 13px; color: #9ca3af; }
+
+/* Video */
+.rel-video-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #111827;
+}
+.rel-video { display: block; width: 100%; }
+
+/* Product grid */
+.rel-grid-heading { margin: 0 0 8px; font-size: 18px; }
+
+.rel-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.rel-grid-item {
+  border-radius: 12px;
+  padding: 10px;
+  background: #020617;
+  border: 1px solid #111827;
+}
+
+.rel-grid-title { margin: 0 0 4px; font-size: 14px; }
+.rel-grid-price { margin: 0; font-size: 13px; color: #a5b4fc; }
+
+/* CTA */
+.rel-cta { text-align: center; }
+
+.rel-cta-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.rel-cta-primary { background: #4f46e5; border-color: #4f46e5; color: #e5e7eb; }
+.rel-cta-secondary { background: transparent; border-color: #4b5563; color: #e5e7eb; }
+
+/* Error block */
+.rel-error {
+  border-color: #7f1d1d;
+  background: radial-gradient(circle at top left, #111827 0, #020617 40%, #020617 100%);
+}
+
+.rel-error-title { margin: 0 0 6px; font-size: 15px; color: #fecaca; }
+.rel-error-message { margin: 0; font-size: 12px; color: #fecaca; }

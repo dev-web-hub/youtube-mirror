@@ -1,0 +1,12 @@
+{
+  "id": "cc_10",
+  "brand": "cubecast.app",
+  "blocks": [
+    { "type": "hero", "title": "cubecast.app Page 10", "subtitle": "Sample auto-generated page" },
+    { "type": "product_grid", "heading": "Featured", "items": [
+      { "title": "Item A", "price": "/Users/christianboullard/mah-relay-engine/public/pages/cc_prod0" },
+      { "title": "Item B", "price": "cc0" }
+    ]},
+    { "type": "cta_button", "label": "Visit", "href": "https://cubecast.app/offer/10" }
+  ]
+}

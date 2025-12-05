@@ -1,0 +1,24 @@
+{
+  "id": "mah_2001",
+  "brand": "mah",
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Affiliate Training 2001",
+      "subtitle": "Grow your commissions faster"
+    },
+    {
+      "type": "product_grid",
+      "heading": "Recommended Tools",
+      "items": [
+        { "title": "Tool A", "price": "$9/mo" },
+        { "title": "Tool B", "price": "$14/mo" }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Learn More",
+      "href": "https://marketaffiliatehelp.com/info/2001"
+    }
+  ]
+}

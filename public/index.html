@@ -1,38 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>YouTube Mirror — Vertical Feed</title>
-  <style>
-    body { margin:0; background:#000; }
-    .video {
-      width: 100%;
-      max-width: 420px;
-      aspect-ratio: 9/16;
-      margin: 0 auto 40px;
-      display: block;
-    }
-  </style>
+  <title>Relay Layout Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<script>
-async function loadFeed() {
-  const res = await fetch("/clips/");
-  const text = await res.text();
-  const files = [...text.matchAll(/href="([^"]+_VT\.mp4)"/g)].map(m => m[1]);
+  <header class="rel-header">
+    <h1 id="rel-brand-label">Relay Engine</h1>
+    <p class="rel-subtitle">
+      Data-driven layouts for all domains (deluxedeals, MAH, MaxTube, CubeCast…)
+    </p>
+    <div class="rel-debug"><code id="rel-debug-info"></code></div>
+  </header>
 
-  files.forEach(f => {
-    const v = document.createElement("video");
-    v.src = "/clips/" + f;
-    v.loop = true;
-    v.autoplay = true;
-    v.muted = true;
-    v.playsInline = true;
-    v.className = "video";
-    document.body.appendChild(v);
-  });
-}
-loadFeed();
-</script>
+  <main id="rel-root" class="rel-root"></main>
+
+  <footer class="rel-footer">
+    <small>
+      Powered by <code>mah-relay.win</code> · Use <code>?brand=</code> and <code>?page=</code>.
+    </small>
+  </footer>
+
+  <script src="/app.js"></script>
 </body>
 </html>

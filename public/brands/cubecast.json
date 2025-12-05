@@ -1,0 +1,6 @@
+{
+  "name": "CubeCast",
+  "colors": { "primary": "#22d3ee" },
+  "defaultCtaLabel": "Play",
+  "defaultCtaHref": "https://cubecast.app"
+}

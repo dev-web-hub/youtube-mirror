@@ -1,10 +1,7 @@
 services:
   - type: static
-    name: youtube_mirror
+    name: mah-relay-engine
     env: static
-    buildCommand: "echo Building youtube_mirror"
-    staticPublishPath: "public"
-    routes:
-      - type: rewrite
-        source: "/*"
-        destination: "/index.html"
+    buildCommand: ""
+    staticPublishPath: public
+    pullRequestPreviewsEnabled: false

@@ -1,0 +1,30 @@
+{
+  "id": "dd_2646",
+  "brand": "maxtube",
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Deluxe Deal 2646",
+      "subtitle": "Generated automatically"
+    },
+    {
+      "type": "product_grid",
+      "heading": "Featured Offers",
+      "items": [
+        {
+          "title": "Deal A",
+          "price": "$25"
+        },
+        {
+          "title": "Deal B",
+          "price": "$35"
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop",
+      "href": "https://maxtube.app/offer/2646"
+    }
+  ]
+}
