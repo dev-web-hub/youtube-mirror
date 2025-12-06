@@ -1,7 +1,7 @@
 (function () {
 
   // ---- CONFIG ---------------------------------------------------------
-  var S3_BASE = "https://cube-pages-prod.s3.amazonaws.com";
+  var S3_BASE = "https://cube-pages-prod.s3.us-west-2.amazonaws.com";
 
   var BRAND_DEFAULTS = {
     deluxedeals: "dd_prod/dd_10000.json",
