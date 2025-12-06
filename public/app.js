@@ -1,7 +1,17 @@
 (function () {
-  /* ---------------------------------------------
-     SIMPLE QUERY PARSER
-  --------------------------------------------- */
+
+  // ---- CONFIG ---------------------------------------------------------
+  var S3_BASE = "https://cube-pages-prod.s3.amazonaws.com";
+
+  var BRAND_DEFAULTS = {
+    deluxedeals: "dd_prod/dd_10000.json",
+    mah:         "mah_prod/mah_10000.json",
+    maxtube:     "mt_prod/mt_10000.json",
+    cubecast:    "cc_prod/cc_10000.json"
+  };
+
+  // ---------------------------------------------------------------------
+
   function qs() {
     var out = {};
     window.location.search
@@ -15,10 +25,7 @@
     return out;
   }
 
-  /* ---------------------------------------------
-     LOGGING (OPTIONAL UI HOOK)
-  --------------------------------------------- */
-  function log(brand, page) {
+  function logInfo(brand, page) {
     var dbg = document.getElementById("rel-debug-info");
     if (dbg) dbg.textContent = "brand=" + brand + " · page=" + page;
 
@@ -26,45 +33,16 @@
     if (lbl) lbl.textContent = "Relay Engine · " + brand;
   }
 
-  /* ---------------------------------------------
-     FETCH HELPERS (S3 FIRST, LOCAL SECOND)
-  --------------------------------------------- */
-  var S3_BUCKET = "cube-pages-prod";
-  var S3_BASE = "https://" + S3_BUCKET + ".s3.amazonaws.com";
-
-  function fetchFromS3(brand, page) {
-    var path = S3_BASE + "/" + brand + "/" + page + "?v=1";
-    return fetch(path).then(function (r) {
-      if (!r.ok) throw new Error("S3 " + r.status + " for " + path);
-      return r.json();
+  function fetchJSON_S3(path) {
+    var url = S3_BASE + "/" + path;
+    return fetch(url).then(function (res) {
+      if (!res.ok) throw new Error("S3 404 for " + url);
+      return res.json();
     });
   }
 
-  function fetchLocal(brand, page) {
-    var path = "/pages/" + brand + "/" + page;
-    return fetch(path).then(function (r) {
-      if (!r.ok) throw new Error("LOCAL " + r.status + " for " + path);
-      return r.json();
-    });
-  }
+  // --- SIMPLE RENDERERS (UBRE-lite mode) -----------------------------
 
-  function fetchLayout(brand, page) {
-    return fetchFromS3(brand, page).catch(function () {
-      return fetchLocal(brand, page);
-    });
-  }
-
-  function fetchBrand(brand) {
-    // Brands remain local on Render
-    return fetch("/brands/" + brand + ".json").then(function (r) {
-      if (!r.ok) throw new Error("Brand config missing: " + brand);
-      return r.json();
-    });
-  }
-
-  /* ---------------------------------------------
-     UBRE RENDERERS
-  --------------------------------------------- */
   function hero(b) {
     var s = document.createElement("section");
     s.className = "rel-block";
@@ -78,34 +56,6 @@
       p.textContent = b.subtitle;
       s.appendChild(p);
     }
-    return s;
-  }
-
-  function video(b) {
-    var s = document.createElement("section");
-    s.className = "rel-block";
-
-    var w = document.createElement("div");
-    w.className = "rel-video-wrapper";
-
-    var v = document.createElement("video");
-    v.className = "rel-video";
-    v.setAttribute("controls", "controls");
-    v.setAttribute("playsinline", "playsinline");
-
-    if (b.autoplay) {
-      v.setAttribute("autoplay", "autoplay");
-      v.setAttribute("muted", "muted");
-    }
-
-    var src = document.createElement("source");
-    src.src = b.src || "";
-    src.type = "video/mp4";
-    v.appendChild(src);
-
-    w.appendChild(v);
-    s.appendChild(w);
-
     return s;
   }
 
@@ -146,15 +96,37 @@
     return s;
   }
 
-  function cta(b, brand) {
+  function video(b) {
+    var s = document.createElement("section");
+    s.className = "rel-block";
+
+    var w = document.createElement("div");
+    w.className = "rel-video-wrapper";
+
+    var v = document.createElement("video");
+    v.className = "rel-video";
+    v.setAttribute("controls", "controls");
+    v.setAttribute("playsinline", "playsinline");
+
+    var src = document.createElement("source");
+    src.src = b.src || "";
+    src.type = "video/mp4";
+    v.appendChild(src);
+
+    w.appendChild(v);
+    s.appendChild(w);
+
+    return s;
+  }
+
+  function cta(b) {
     var s = document.createElement("section");
     s.className = "rel-block rel-cta";
 
     var a = document.createElement("a");
-    a.className =
-      "rel-cta-btn " + (b.style === "secondary" ? "rel-cta-secondary" : "rel-cta-primary");
-    a.href = b.href || brand.defaultCtaHref || "#";
-    a.textContent = b.label || brand.defaultCtaLabel || "Continue";
+    a.className = "rel-cta-btn";
+    a.href = b.href || "#";
+    a.textContent = b.label || "Continue";
 
     s.appendChild(a);
     return s;
@@ -164,10 +136,8 @@
     var s = document.createElement("section");
     s.className = "rel-block rel-error";
     var h = document.createElement("h3");
-    h.className = "rel-error-title";
     h.textContent = "Error";
     var p = document.createElement("p");
-    p.className = "rel-error-message";
     p.textContent = msg;
     s.appendChild(h);
     s.appendChild(p);
@@ -176,53 +146,45 @@
 
   var R = {
     hero: hero,
-    video_player: video,
     product_grid: grid,
+    video_player: video,
     cta_button: cta
   };
 
-  /* ---------------------------------------------
-     RENDER ROUTINE
-  --------------------------------------------- */
-  function renderPage(layout, brand) {
+  function renderPage(layout) {
     var root = document.getElementById("rel-root");
-    if (!root) return;
-
-    while (root.firstChild) root.removeChild(root.firstChild);
+    root.innerHTML = "";
 
     (layout.blocks || []).forEach(function (b) {
       try {
         var fn = R[b.type];
         if (!fn) root.appendChild(err("Unknown block type: " + b.type));
-        else root.appendChild(fn(b, brand));
+        else root.appendChild(fn(b));
       } catch (e) {
         root.appendChild(err(e.message || String(e)));
       }
     });
   }
 
-  /* ---------------------------------------------
-     MAIN ENTRYPOINT
-  --------------------------------------------- */
+  // --- ENTRYPOINT -----------------------------------------------------
+
   function run() {
     var q = qs();
+
     var brand = q.brand || "deluxedeals";
-    var page = q.page || "local-sim/demo_001.json";
+    var defaultPage = BRAND_DEFAULTS[brand] || BRAND_DEFAULTS["deluxedeals"];
+    var page = q.page || defaultPage;
 
-    log(brand, page);
+    logInfo(brand, page);
 
-    Promise.all([
-      fetchBrand(brand),
-      fetchLayout(brand, page)
-    ])
-      .then(function (r) {
-        renderPage(r[1], r[0]);
-      })
+    fetchJSON_S3(page)
+      .then(renderPage)
       .catch(function (e) {
-        var root = document.getElementById("rel-root");
-        root.appendChild(err(e.message || String(e)));
+        document.getElementById("rel-root")
+          .appendChild(err(e.message || "Failed loading page."));
       });
   }
 
   run();
+
 })();
