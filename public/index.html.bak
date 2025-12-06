@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relay Layout Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="rel-header">
+    <h1 id="rel-brand-label">Relay Engine</h1>
+    <p class="rel-subtitle">
+      Data-driven layouts for all domains (deluxedeals, MAH, MaxTube, CubeCast…)
+    </p>
+    <div class="rel-debug"><code id="rel-debug-info"></code></div>
+  </header>
+
+  <main id="rel-root" class="rel-root"></main>
+
+  <footer class="rel-footer">
+    <small>
+      Powered by <code>mah-relay.win</code> · Use <code>?brand=</code> and <code>?page=</code>.
+    </small>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
