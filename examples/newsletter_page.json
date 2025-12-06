@@ -1,0 +1,53 @@
+{
+  "id": "example-newsletter-page",
+  "version": "1.0.0",
+  "lazy_mode": "auto",
+  "blocks": [
+    {
+      "id": "hero-newsletter",
+      "type": "hero",
+      "title": "Newsletter Layout",
+      "subtitle": "Form-first page with lazy product grid and CTA.",
+      "background": "linear-gradient(135deg,#020617,#0f172a)"
+    },
+    {
+      "id": "newsletter-main",
+      "type": "newsletter_section",
+      "lazy": false,
+      "heading": "Join the simulation loop",
+      "description": "Get deterministic layout recipes and 12x12 cycle patterns.",
+      "placeholder": "email@domain.com"
+    },
+    {
+      "id": "products-lazy",
+      "type": "product_grid",
+      "lazy": true,
+      "heading": "Recent patterns",
+      "items": [
+        {
+          "id": "p-layout-a",
+          "title": "Landing hero + grid",
+          "price": "Recipe A"
+        },
+        {
+          "id": "p-layout-b",
+          "title": "Doomscroll vertical",
+          "price": "Recipe B"
+        },
+        {
+          "id": "p-layout-c",
+          "title": "Newsletter spotlight",
+          "price": "Recipe C"
+        }
+      ]
+    },
+    {
+      "id": "cta-newsletter",
+      "type": "cta_button",
+      "lazy": true,
+      "label": "Load doomscroll example",
+      "href": "../examples/video_doomscroll.json",
+      "style": "primary"
+    }
+  ]
+}

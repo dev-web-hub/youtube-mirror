@@ -1,0 +1,60 @@
+{
+  "id": "example-landing-hero",
+  "version": "1.0.0",
+  "lazy_mode": "auto",
+  "blocks": [
+    {
+      "id": "hero-main",
+      "type": "hero",
+      "title": "Universal Block Render Engine",
+      "subtitle": "Data-driven layouts, deterministic rendering, and full lazy loading.",
+      "background": "linear-gradient(135deg,#020617,#111827)"
+    },
+    {
+      "id": "video-intro",
+      "type": "video_player",
+      "lazy": true,
+      "src": "https://www.example.com/video.mp4",
+      "poster": "https://www.example.com/poster.jpg",
+      "autoplay": false
+    },
+    {
+      "id": "products-main",
+      "type": "product_grid",
+      "lazy": true,
+      "heading": "Featured Blocks",
+      "items": [
+        {
+          "id": "p-hero",
+          "title": "Hero Block",
+          "price": "Included"
+        },
+        {
+          "id": "p-video",
+          "title": "Video Player Block",
+          "price": "Included"
+        },
+        {
+          "id": "p-newsletter",
+          "title": "Newsletter Section",
+          "price": "Included"
+        }
+      ]
+    },
+    {
+      "id": "cta-main",
+      "type": "cta_button",
+      "label": "View layout JSON",
+      "href": "../examples/landing_hero.json",
+      "style": "primary"
+    },
+    {
+      "id": "newsletter-main",
+      "type": "newsletter_section",
+      "lazy": true,
+      "heading": "Stay in the loop",
+      "description": "Subscribe to receive new layout patterns and engine updates.",
+      "placeholder": "you@example.com"
+    }
+  ]
+}

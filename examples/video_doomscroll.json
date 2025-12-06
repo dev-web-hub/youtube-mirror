@@ -1,0 +1,46 @@
+{
+  "id": "example-video-doomscroll",
+  "version": "1.0.0",
+  "lazy_mode": "auto",
+  "blocks": [
+    {
+      "id": "hero-video-top",
+      "type": "hero",
+      "title": "Vertical Doomscroll Reel",
+      "subtitle": "A stack of video_player blocks, lazily hydrated as you scroll.",
+      "background": "linear-gradient(135deg,#020617,#1f2937)"
+    },
+    {
+      "id": "video-1",
+      "type": "video_player",
+      "lazy": true,
+      "src": "https://www.example.com/video1.mp4",
+      "poster": "https://www.example.com/poster1.jpg",
+      "autoplay": false
+    },
+    {
+      "id": "video-2",
+      "type": "video_player",
+      "lazy": true,
+      "src": "https://www.example.com/video2.mp4",
+      "poster": "https://www.example.com/poster2.jpg",
+      "autoplay": false
+    },
+    {
+      "id": "video-3",
+      "type": "video_player",
+      "lazy": true,
+      "src": "https://www.example.com/video3.mp4",
+      "poster": "https://www.example.com/poster3.jpg",
+      "autoplay": false
+    },
+    {
+      "id": "cta-video-footer",
+      "type": "cta_button",
+      "lazy": true,
+      "label": "Return to hero example",
+      "href": "../examples/landing_hero.json",
+      "style": "secondary"
+    }
+  ]
+}
