@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "amazon_partner_tags": {
+      "US": "deluxedeals20-20",
+      "CA": "deluxedealsca-20"
+    },
+    "notes": [
+      "This is a frozen snapshot of early affiliate campaigns.",
+      "Engine can choose campaigns by id or slug.",
+      "Later we can extend this file with more campaigns or per-region links."
+    ]
+  },
+  "campaigns": [
+    {
+      "id": 1,
+      "slug": "household-hacks",
+      "title": "Household Hacks",
+      "channel": "amazon",
+      "products": [
+        { "name": "Swiffer PowerMop", "url": "https://amzn.to/46yLiY8" },
+        { "name": "Gain Laundry Detergent", "url": "https://amzn.to/4gQfV00" },
+        { "name": "Charmin Toilet Paper", "url": "https://amzn.to/4pHxYcA" },
+        { "name": "Stanley Tumbler", "url": "https://amzn.to/3Kqmgmt" },
+        { "name": "Pixel Buds Pro 2", "url": "https://amzn.to/46Kqddp" },
+        { "name": "Barefoot Contessa Cookbook", "url": "https://amzn.to/3Kf4ClT" },
+        { "name": "Amazon Basics Batteries", "url": "https://amzn.to/46xSgxX" },
+        { "name": "Tide Liquid Laundry Detergent", "url": "https://amzn.to/46xUIEF" },
+        { "name": "Ziploc Freezer Bags (60 count)", "url": "https://amzn.to/3IAsDmO" },
+        { "name": "Dawn Powerwash Dish Spray", "url": "https://amzn.to/42dKnuS" }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "tech-ai-tools",
+      "title": "Tech & AI Tools",
+      "channel": "amazon",
+      "products": [
+        { "name": "Google Pixel 9 Pro XL Smartphone", "url": "https://amzn.to/42yugZ9" },
+        { "name": "Apple Watch Series 10 (GPS, 46mm)", "url": "https://amzn.to/46Wgge0" },
+        { "name": "Samsung 990 PRO SSD 1TB (PCIe Gen4)", "url": "https://amzn.to/4gRFGNl" },
+        { "name": "LG 24\" IPS Computer Monitor (USB-C)", "url": "https://amzn.to/3IGeggM" },
+        { "name": "Seagate 4TB Portable External Hard Drive", "url": "https://amzn.to/3VxqwDc" },
+        { "name": "Logitech MX Master 3S Mouse", "url": "https://amzn.to/3KmVGuD" },
+        { "name": "Keychron K2 Mechanical Keyboard (Wireless)", "url": "https://amzn.to/4pI7RSY" },
+        { "name": "Blue Yeti USB Microphone", "url": "https://amzn.to/4gF2Vdk" },
+        { "name": "TP-Link WiFi 6 Router (AX3000)", "url": "https://amzn.to/46lFAKm" },
+        { "name": "Anker PowerCore Portable Charger (20,000mAh)", "url": "https://amzn.to/4nP7tQI" }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "fitness-health",
+      "title": "Fitness & Health",
+      "channel": "amazon",
+      "products": [
+        { "name": "Fitbit Charge 6 Fitness Tracker", "url": "https://amzn.to/4mC8EC2" },
+        { "name": "Bowflex Adjustable Dumbbells", "url": "https://amzn.to/4nJ0vwC" },
+        { "name": "Gaiam Yoga Mat", "url": "https://amzn.to/4nIl5Ny" },
+        { "name": "Theragun Mini Massager", "url": "https://amzn.to/3VDhapv" },
+        { "name": "Hydro Flask Water Bottle", "url": "https://amzn.to/46mEden" },
+        { "name": "Resistance Bands Set", "url": "https://amzn.to/4pI4Rps" },
+        { "name": "Adjustable Weight Bench", "url": "https://amzn.to/46qGLZ6" },
+        { "name": "Under Armour Gym Bag", "url": "https://amzn.to/46uIj2I" },
+        { "name": "NutriBullet Blender", "url": "https://amzn.to/46Fmrlm" },
+        { "name": "Garmin Forerunner Smartwatch", "url": "https://amzn.to/4mtvSu1" }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "automotive-helpers",
+      "title": "Automotive Helpers",
+      "channel": "amazon",
+      "products": [
+        { "name": "NOCO Boost Plus Car Battery Jump Starter", "url": "https://amzn.to/46Dc15T" },
+        { "name": "Anker ROAV Dash Cam", "url": "https://amzn.to/46KtWrp" },
+        { "name": "Portable Tire Inflator (AstroAI)", "url": "https://amzn.to/3KjxZmV" },
+        { "name": "Meguiar’s Car Cleaning Kit", "url": "https://amzn.to/4gF3wf4" },
+        { "name": "Phone Mount for Car Dashboard", "url": "https://amzn.to/4gHbvs9" },
+        { "name": "Chemical Guys Microfiber Towels", "url": "https://amzn.to/46lws8w" },
+        { "name": "Portable Car Vacuum Cleaner", "url": "https://amzn.to/4gLbvr9" },
+        { "name": "Bluetooth FM Transmitter", "url": "https://amzn.to/4nIlOOM" },
+        { "name": "Windshield Sunshade", "url": "https://amzn.to/4mUjvYt" },
+        { "name": "Emergency Roadside Kit", "url": "https://amzn.to/46IQhFH" }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "small-kitchen-wins",
+      "title": "Small Kitchen Wins",
+      "channel": "amazon",
+      "products": [
+        { "name": "Instant Pot Duo 7-in-1", "url": "https://amzn.to/42cQ0td" },
+        { "name": "Ninja Air Fryer", "url": "https://amzn.to/428dYpx" },
+        { "name": "Keurig K-Mini Coffee Maker", "url": "https://amzn.to/4pED4X6" },
+        { "name": "Vitamix E310 Blender", "url": "https://amzn.to/4nFV1mZ" },
+        { "name": "Lodge Cast Iron Skillet", "url": "https://amzn.to/4gLzXZs" },
+        { "name": "OXO Good Grips 20-Piece Kitchen Tool Set", "url": "https://amzn.to/46o6l0M" },
+        { "name": "Cuisinart Knife Set", "url": "https://amzn.to/3Kk4xgI" },
+        { "name": "KitchenAid Artisan Stand Mixer", "url": "https://amzn.to/4nUoKs2" },
+        { "name": "Hamilton Beach Toaster Oven", "url": "https://amzn.to/3IFC9F7" },
+        { "name": "Brita Water Filter Pitcher", "url": "https://amzn.to/4nmBN5x" }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "home-office-setup",
+      "title": "Home Office Setup",
+      "channel": "amazon",
+      "products": [
+        { "name": "Herman Miller Aeron Chair", "url": "https://amzn.to/42RCqvx" },
+        { "name": "FlexiSpot Standing Desk", "url": "https://amzn.to/3IAuV5o" },
+        { "name": "Logitech C920x HD Pro Webcam", "url": "https://amzn.to/42bHkDu" },
+        { "name": "HP LaserJet Pro Printer", "url": "https://amzn.to/4gRHXbl" },
+        { "name": "Amazon Echo Dot (5th Gen)", "url": "https://amzn.to/482VU3Q" },
+        { "name": "Philips Hue Smart Light Starter Kit", "url": "https://amzn.to/46FjLnM" },
+        { "name": "Bose QuietComfort 45 Headphones", "url": "https://amzn.to/3W9Iz2q" },
+        { "name": "SteelSeries Gaming Mouse Pad (XXL)", "url": "https://amzn.to/46JaZFy" },
+        { "name": "Dual Monitor Stand", "url": "https://amzn.to/42JKePR" },
+        { "name": "Cable Management Box", "url": "https://amzn.to/4nk5KD3" }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "smart-home",
+      "title": "Smart Home",
+      "channel": "amazon",
+      "products": [
+        { "name": "Ring Video Doorbell", "url": "https://amzn.to/4nNTWsF" },
+        { "name": "Google Nest Thermostat", "url": "https://amzn.to/4nLJUIv" },
+        { "name": "Wyze Cam v3 Security Camera", "url": "https://amzn.to/4pYS2rl" },
+        { "name": "Philips Hue Lightstrip", "url": "https://amzn.to/3Ir8XBP" },
+        { "name": "August Smart Lock", "url": "https://amzn.to/4gLdfRd" },
+        { "name": "Kasa Smart Plugs", "url": "https://amzn.to/4gNgnfw" },
+        { "name": "Eufy RoboVac", "url": "https://amzn.to/4gLfuUD" },
+        { "name": "Arlo Pro 4 Security Camera System", "url": "https://amzn.to/3VDDRd9" },
+        { "name": "Echo Show 8", "url": "https://amzn.to/3Kk94zG" },
+        { "name": "TP-Link Deco Mesh WiFi", "url": "https://amzn.to/4mL7Qes" }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "outdoors-travel",
+      "title": "Outdoors & Travel",
+      "channel": "amazon",
+      "products": [
+        { "name": "Coleman Sundome Tent (4-Person)", "url": "https://amzn.to/4gCMgag" },
+        { "name": "Osprey Daylite Backpack", "url": "https://amzn.to/3VBkNw4" },
+        { "name": "YETI Rambler Tumbler", "url": "https://amzn.to/4myF8wU" },
+        { "name": "LifeStraw Water Filter", "url": "https://amzn.to/3W8Sh57" },
+        { "name": "Coleman Sleeping Bag", "url": "https://amzn.to/4nq0fD9" },
+        { "name": "Hydro Flask Wide Mouth Bottle", "url": "https://amzn.to/42cDwSx" },
+        { "name": "Portable Camping Stove (Jetboil)", "url": "https://amzn.to/3W9ggBe" },
+        { "name": "Samsonite Luggage Spinner", "url": "https://amzn.to/4nJLCu0" },
+        { "name": "Portable Power Station (Jackery)", "url": "https://amzn.to/3IACV6r" },
+        { "name": "Trekking Poles (Black Diamond)", "url": "https://amzn.to/3VAYgQ4" }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "pets",
+      "title": "Pets",
+      "channel": "amazon",
+      "products": [
+        { "name": "Furbo Dog Camera", "url": "https://amzn.to/3Vxh82t" },
+        { "name": "KONG Classic Dog Toy", "url": "https://amzn.to/3KmSQWq" },
+        { "name": "PetSafe Automatic Feeder", "url": "https://amzn.to/4gEB6BT" },
+        { "name": "Cat Tree Tower", "url": "https://amzn.to/46FuCOQ" },
+        { "name": "Elevated Pet Food Bowls", "url": "https://amzn.to/4pHzVWo" },
+        { "name": "Self-Cleaning Litter Box", "url": "https://amzn.to/4mCeBz1" },
+        { "name": "Dog Car Seat Cover", "url": "https://amzn.to/4gHY0bL" },
+        { "name": "Pet Grooming Kit", "url": "https://amzn.to/4ngdSVe" },
+        { "name": "Portable Pet Water Bottle", "url": "https://amzn.to/46nikM1" },
+        { "name": "Dog Training Collar", "url": "https://amzn.to/3Kt0Q8l" }
+      ]
+    },
+    {
+      "id": 10,
+      "slug": "parenting-kids",
+      "title": "Parenting & Kids",
+      "channel": "amazon",
+      "products": [
+        { "name": "Graco Pack ’n Play Playard", "url": "https://amzn.to/46Dbe4H" },
+        { "name": "BabyBjörn Carrier", "url": "https://amzn.to/3VB7N9L" },
+        { "name": "Fisher-Price Jumperoo", "url": "https://amzn.to/4pEJa9Q" },
+        { "name": "Chicco Convertible Car Seat", "url": "https://amzn.to/3KjB06J" },
+        { "name": "Philips Avent Baby Bottles", "url": "https://amzn.to/4nT1hY1" },
+        { "name": "Pampers Swaddlers Diapers", "url": "https://amzn.to/3KjX55c" },
+        { "name": "Owlet Smart Baby Monitor", "url": "https://amzn.to/4pGWmLn" },
+        { "name": "LEGO Classic Brick Set", "url": "https://amzn.to/3KkSy2m" },
+        { "name": "Melissa & Doug Wooden Toys", "url": "https://amzn.to/3IDvNpJ" },
+        { "name": "Crayola Art Supplies Kit", "url": "https://amzn.to/4pGN9Tt" }
+      ]
+    },
+    {
+      "id": 16,
+      "slug": "sisters-creative-line",
+      "title": "Sister’s Creative Line",
+      "channel": "amazon-ca",
+      "products": [
+        {
+          "name": "Joie de Vivre Listes du Jour",
+          "url": "https://www.amazon.ca/Joie-Vivre-Listes-Jour-organiser/dp/B0FRR73CB9/"
+        },
+        {
+          "name": "Little Dog Always Barking (Hélène Boullard)",
+          "url": "https://www.amazon.ca/Little-Always-Barking-Hélène-Boullard/dp/B0FQJJ95JT/"
+        },
+        {
+          "name": "Joie de Vivre Checklists To-Do",
+          "url": "https://www.amazon.ca/Joie-Vivre-Checklists-Do-Joyful/dp/B0FRLQCX2S/"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "slug": "joie-by-lise-full",
+      "title": "Joie by Lise — Full Collection",
+      "channel": "joiebylise",
+      "products": [
+        { "name": "Watercolour Birthday Presents - French Language Pack of 5", "url": "https://joiebylise.com/products/watercolour-birthday-presents-french-language-pack-of-5" },
+        { "name": "Watercolour Birthday Presents - Spanish Language - Pack of 5", "url": "https://joiebylise.com/products/watercolour-birthday-presents-spanish-language-pack-of-5" },
+        { "name": "Watercolour Birthday Presents – Simplified Chinese – Pack of 5", "url": "https://joiebylise.com/products/handpainted-birthday-presents-cards-simplified-chinese-pack-of-5" },
+        { "name": "Birthday Balloons - Ballons d'anniversaire", "url": "https://joiebylise.com/products/birthday-balloons" },
+        { "name": "Luxury Match Jars - Pots d’allumettes de luxe", "url": "https://joiebylise.com/products/luxury-match-jars-pots-d-allumettes-de-luxe" },
+        { "name": "Watercolour Birthday Presents", "url": "https://joiebylise.com/products/greeting-cards-1-or-10-pcs" },
+        { "name": "Shea Butter Art Soap - Savon au beurre de karité", "url": "https://joiebylise.com/products/marbled-shea-butter-soap" },
+        { "name": "Oh Canada! Maple Syrup soy wax candle", "url": "https://joiebylise.com/products/oh-canada-maple-syrup-soy-wax-candle" },
+        { "name": "Lavender Haze Aromatherapy Candle", "url": "https://joiebylise.com/products/lavender-haze-aromatherapy-candle" },
+        { "name": "Lavender Haze Aromatherapy Candle - Brume de lavende", "url": "https://joiebylise.com/products/lavender-haze-aromatherapy-candle-brume-de-lavende-bougie-daromatherapie" },
+        { "name": "5-Card Discovery Pack + Free Shipping", "url": "https://joiebylise.com/products/5-card-discovery-pack" },
+        { "name": "10-Pack 3oz Candle Discovery Set – Choose Any 10 Scents + Free Shipping", "url": "https://joiebylise.com/products/10-pack-3oz-candle-discovery-set-choose-any-3-scents-free-shipping" },
+        { "name": "13oz Candle Discovery Set – Choose Any 3 Scents + Free Shipping", "url": "https://joiebylise.com/products/13-oz-jar-candle-trio-free-shipping" },
+        { "name": "3oz Candle Discovery Set – Choose Any 3 Scents + Free Shipping", "url": "https://joiebylise.com/products/3-candle-discovery-set" },
+        { "name": "Croissants amoureux - Croissants in love", "url": "https://joiebylise.com/products/croissant-amoureux-croissant-in-love" },
+        { "name": "3oz Bébé Wedding Candle Trio", "url": "https://joiebylise.com/products/3oz-bebe-wedding-candle-trio" },
+        { "name": "Oh Canada! Maple Syrup candle - Bougie sirop d'érable", "url": "https://joiebylise.com/products/oh-canada-maple-syrup-candle-bougie-sirop-derable" },
+        { "name": "Lunar New Year - 农历新年", "url": "https://joiebylise.com/products/lunar-new-year-greeting-card" },
+        { "name": "MagSafe tough case for iPhone", "url": "https://joiebylise.com/products/magsafe%C2%AE-tough-case-for-iphone%C2%AE" },
+        { "name": "Stainless steel water bottle with a straw lid", "url": "https://joiebylise.com/products/stainless-steel-water-bottle-with-a-straw-lid" },
+        { "name": "Love You Mom - Je t'aime maman", "url": "https://joiebylise.com/products/love-you-mom-je-taime-maman" },
+        { "name": "Happy Easter - З Великоднем", "url": "https://joiebylise.com/products/pysanky-easter-eggs" },
+        { "name": "Merry Merry - Joyeux Joyeux", "url": "https://joiebylise.com/products/merry-merry-joyeux-joyeux" },
+        { "name": "Empathy Lemons - Citrons d'empathie", "url": "https://joiebylise.com/products/empathy-lemons-citron-empathie" },
+        { "name": "Macarons amoureux II", "url": "https://joiebylise.com/products/macarons-amoureux-ii" },
+        { "name": "Flowers for mom - Fleurs pour maman", "url": "https://joiebylise.com/products/mothers-day-flowers" },
+        { "name": "Blooming Love - L'amour en fleur", "url": "https://joiebylise.com/products/blooming-love" },
+        { "name": "3 oz Soy Wax Bougie - Weekend à Paris, Tobacco-Oud-Vanilla", "url": "https://joiebylise.com/products/3-oz-soy-wax-bougie-weekend-a-paris-tobacco-oud-vanilla" },
+        { "name": "3 oz Soy Wax Bougie - Champagne", "url": "https://joiebylise.com/products/3-oz-soy-wax-bougie-champagne" },
+        { "name": "13 oz Remi Soy Wax Bougie - Bourbon + Sandalwood", "url": "https://joiebylise.com/products/13-oz-remi-soy-wax-bougie-bourbon-sandalwood" }
+      ]
+    }
+  ]
+}
