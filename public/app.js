@@ -1,23 +1,44 @@
 (function () {
-  function qs() {
-    var out = {};
-    window.location.search
-      .substring(1)
-      .split("&")
-      .forEach(function (kv) {
-        if (!kv) return;
-        var p = kv.split("=");
-        out[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || "");
-      });
-    return out;
+  //
+  // BRAND MAP — match domain → brand prefix
+  //
+  var BRAND_MAP = {
+    "deluxedeals.net": "dd",
+    "www.deluxedeals.net": "dd",
+
+    "maxtube.app": "mt",
+    "www.maxtube.app": "mt",
+
+    "cubecast.app": "cc",
+    "www.cubecast.app": "cc",
+
+    "marketaffiliatehelp.com": "mah",
+    "www.marketaffiliatehelp.com": "mah",
+
+    // for local testing
+    "localhost": "dd",
+    "127.0.0.1": "dd"
+  };
+
+  function detectBrand() {
+    var h = window.location.hostname.toLowerCase();
+    return BRAND_MAP[h] || "dd"; // default fallback
   }
 
-  function log(brand, page) {
-    var dbg = document.getElementById("rel-debug-info");
-    if (dbg) dbg.textContent = "brand=" + brand + " · page=" + page;
+  function extractPageId() {
+    var p = window.location.pathname.replace(/^\/+/, "");
+    if (!p) return null;
 
-    var lbl = document.getElementById("rel-brand-label");
-    if (lbl) lbl.textContent = "Relay Engine · " + brand;
+    // ex: "/12345" → "12345"
+    var m = p.match(/^(\d{1,10})$/);
+    if (m) return m[1];
+
+    return null;
+  }
+
+  function buildJsonPath(brand, pageId) {
+    if (!pageId) return null;
+    return "/pages/" + brand + "_prod/" + brand + "_" + pageId + ".json";
   }
 
   function fetchJSON(path) {
@@ -27,157 +48,36 @@
     });
   }
 
-  /* RENDERERS */
-
-  function hero(b) {
-    var s = document.createElement("section");
-    s.className = "rel-block";
-    var h = document.createElement("h2");
-    h.className = "rel-hero-title";
-    h.textContent = b.title || "Hero";
-    s.appendChild(h);
-    if (b.subtitle) {
-      var p = document.createElement("p");
-      p.className = "rel-hero-subtitle";
-      p.textContent = b.subtitle;
-      s.appendChild(p);
-    }
-    return s;
-  }
-
-  function video(b) {
-    var s = document.createElement("section");
-    s.className = "rel-block";
-
-    var w = document.createElement("div");
-    w.className = "rel-video-wrapper";
-
-    var v = document.createElement("video");
-    v.className = "rel-video";
-    v.setAttribute("controls", "controls");
-    v.setAttribute("playsinline", "playsinline");
-    if (b.autoplay) {
-      v.setAttribute("autoplay", "autoplay");
-      v.setAttribute("muted", "muted");
-    }
-
-    var src = document.createElement("source");
-    src.src = b.src || "";
-    src.type = "video/mp4";
-    v.appendChild(src);
-
-    w.appendChild(v);
-    s.appendChild(w);
-
-    return s;
-  }
-
-  function grid(b) {
-    var s = document.createElement("section");
-    s.className = "rel-block";
-
-    if (b.heading) {
-      var h = document.createElement("h3");
-      h.className = "rel-grid-heading";
-      h.textContent = b.heading;
-      s.appendChild(h);
-    }
-
-    var list = document.createElement("div");
-    list.className = "rel-grid-list";
-
-    (b.items || []).forEach(function (item) {
-      var c = document.createElement("article");
-      c.className = "rel-grid-item";
-
-      var t = document.createElement("h4");
-      t.className = "rel-grid-title";
-      t.textContent = item.title || "Item";
-      c.appendChild(t);
-
-      if (item.price) {
-        var p = document.createElement("p");
-        p.className = "rel-grid-price";
-        p.textContent = item.price;
-        c.appendChild(p);
-      }
-
-      list.appendChild(c);
-    });
-
-    s.appendChild(list);
-    return s;
-  }
-
-  function cta(b, brand) {
-    var s = document.createElement("section");
-    s.className = "rel-block rel-cta";
-
-    var a = document.createElement("a");
-    a.className =
-      "rel-cta-btn " + (b.style === "secondary" ? "rel-cta-secondary" : "rel-cta-primary");
-    a.href = b.href || brand.defaultCtaHref || "#";
-    a.textContent = b.label || brand.defaultCtaLabel || "Continue";
-
-    s.appendChild(a);
-    return s;
-  }
-
-  function err(msg) {
-    var s = document.createElement("section");
-    s.className = "rel-block rel-error";
-    var h = document.createElement("h3");
-    h.className = "rel-error-title";
-    h.textContent = "Error";
-    var p = document.createElement("p");
-    p.className = "rel-error-message";
-    p.textContent = msg;
-    s.appendChild(h);
-    s.appendChild(p);
-    return s;
-  }
-
-  var R = {
-    hero: hero,
-    video_player: video,
-    product_grid: grid,
-    cta_button: cta
-  };
-
-  function renderPage(layout, brand) {
-    var root = document.getElementById("rel-root");
+  function showError(msg) {
+    var root = document.getElementById("app");
     if (!root) return;
-
-    while (root.firstChild) root.removeChild(root.firstChild);
-
-    (layout.blocks || []).forEach(function (b) {
-      try {
-        var fn = R[b.type];
-        if (!fn) root.appendChild(err("Unknown block type: " + b.type));
-        else root.appendChild(fn(b, brand));
-      } catch (e) {
-        root.appendChild(err(e.message || String(e)));
-      }
-    });
+    root.innerHTML = "<div style='padding:20px;color:#f88;font-family:monospace;'>" + msg + "</div>";
   }
 
   function run() {
-    var q = qs();
-    var brand = q.brand || "deluxedeals";
-    var page = q.page || "local-sim/demo_001.json";
+    var brand = detectBrand();
+    var pageId = extractPageId();
 
-    log(brand, page);
+    if (!pageId) {
+      showError("Missing page ID in URL. Expected /12345");
+      return;
+    }
 
-    Promise.all([
-      fetchJSON("/brands/" + brand + ".json"),
-      fetchJSON("/pages/" + page)
-    ])
-      .then(function (r) {
-        renderPage(r[1], r[0]);
+    var jsonPath = buildJsonPath(brand, pageId);
+
+    fetchJSON(jsonPath)
+      .then(function (layout) {
+        if (window.UBRE && typeof window.UBRE.renderLayout === "function") {
+          window.UBRE.renderLayout(layout, {
+            strict: false,
+            rootId: "app"
+          });
+        } else {
+          showError("UBRE engine not loaded.");
+        }
       })
       .catch(function (e) {
-        var root = document.getElementById("rel-root");
-        root.appendChild(err(e.message || String(e)));
+        showError("Could not load: " + (e.message || String(e)));
       });
   }
 
