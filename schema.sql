@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts TEXT,
+  type TEXT,
+  product TEXT,
+  session TEXT,
+  country TEXT
+);
+
+CREATE TABLE IF NOT EXISTS sessions (
+  id TEXT PRIMARY KEY,
+  created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS products (
+  slug TEXT PRIMARY KEY,
+  views INTEGER DEFAULT 0,
+  clicks INTEGER DEFAULT 0
+);

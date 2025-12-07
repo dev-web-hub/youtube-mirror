@@ -10,7 +10,6 @@ player.muted = true;
 player.setAttribute("playsinline", "");
 player.setAttribute("webkit-playsinline", "");
 
-/* ✅ FETCH FEED */
 fetch("/cubecast/feed.json")
   .then(r => r.json())
   .then(data => {
@@ -23,23 +22,23 @@ fetch("/cubecast/feed.json")
 function preloadNext() {
   if (feed[index]) {
     player.src = feed[index];
+    player.play().catch(() => {});
   }
 }
 
-/* ✅ SAFARI AUTOPLAY UNLOCK */
 function unlockPlayback() {
   if (unlocked) return;
   unlocked = true;
   player.muted = false;
-  player.play().catch(() => {});
+  player.play();
 }
 
 document.body.addEventListener("click", unlockPlayback, { once: true });
-document.body.addEventListener("touchstart", unlockPlayback, { once: true });
 
-/* ✅ NEXT VIDEO */
 function nextVideo() {
   swipeCount++;
+
+  cubeLog("swipe", "cubecast");
 
   if (swipeCount === window.CTA_AFTER) {
     showCTA();
@@ -50,22 +49,20 @@ function nextVideo() {
   if (index >= feed.length) index = 0;
 
   player.src = feed[index];
-  player.play().catch(() => {});
+  player.play();
 }
 
-/* ✅ CTA OVERLAY */
 function showCTA() {
   player.pause();
-  ctaFrame.style.display = "flex";
+  cubeLog("cta_shown", "xreal-one");
   ctaFrame.innerHTML = `<iframe src="${window.CTA_URL}"></iframe>`;
+  ctaFrame.style.display = "flex";
 }
 
-/* ✅ DESKTOP SWIPE */
 document.addEventListener("keydown", e => {
   if (e.key === "ArrowDown" || e.key === " ") nextVideo();
 });
 
-/* ✅ MOBILE SWIPE */
 let startY = 0;
 document.addEventListener("touchstart", e => {
   startY = e.touches[0].clientY;

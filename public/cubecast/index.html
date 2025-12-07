@@ -6,21 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
 
-    body {
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: white;
-    }
+    body { background: black; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; }
 
     .phone-frame {
       width: 390px;
@@ -115,7 +103,7 @@
     <div class="top-bar">CUBECAST</div>
 
     <div class="viewport">
-      <video id="player" playsinline muted></video>
+      <video id="player" playsinline muted autoplay></video>
       <div class="swipe-hint">▲ swipe</div>
     </div>
 
@@ -128,6 +116,8 @@
 
   <div id="cta-frame"></div>
 
+  <script src="/cubecast/analytics.js"></script>
   <script src="/cubecast/cubecast.js"></script>
+
 </body>
 </html>

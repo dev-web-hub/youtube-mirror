@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CubeCast Live Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: #0b0b0f;
+      color: white;
+      font-family: monospace;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border-bottom: 1px solid #222;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    th {
+      color: #8ab4ff;
+      text-align: left;
+    }
+
+    tr:hover {
+      background: #161628;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📡 CubeCast Live Analytics</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Product</th>
+        <th>Session</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    async function load() {
+      const res = await fetch("/analytics");
+      const data = await res.json();
+      const rows = document.getElementById("rows");
+      rows.innerHTML = "";
+
+      data
+        .sort((a, b) => b.ts - a.ts)
+        .forEach(e => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${new Date(e.ts).toLocaleTimeString()}</td>
+            <td>${e.type}</td>
+            <td>${e.product || "-"}</td>
+            <td>${e.session}</td>
+          `;
+          rows.appendChild(tr);
+        });
+    }
+
+    load();
+    setInterval(load, 2000);
+  </script>
+
+</body>
+</html>
