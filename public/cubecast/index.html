@@ -22,7 +22,6 @@
       color: white;
     }
 
-    /* PHONE FRAME */
     .phone-frame {
       width: 390px;
       height: 780px;
@@ -34,7 +33,6 @@
       box-shadow: 0 0 60px rgba(0,0,0,0.8);
     }
 
-    /* TOP BRAND BAR */
     .top-bar {
       height: 56px;
       background: #0d0d18;
@@ -46,7 +44,6 @@
       font-size: 14px;
     }
 
-    /* VIDEO VIEWPORT */
     .viewport {
       flex: 1;
       position: relative;
@@ -71,7 +68,6 @@
       opacity: 0.6;
     }
 
-    /* CTA BAR */
     .bottom-bar {
       height: 64px;
       background: #0d0d18;
@@ -96,7 +92,6 @@
       color: white;
     }
 
-    /* CTA OVERLAY FRAME */
     #cta-frame {
       position: fixed;
       inset: 0;
@@ -117,18 +112,13 @@
 
   <div class="phone-frame">
 
-    <!-- BRAND -->
-    <div class="top-bar">
-      CUBECAST
-    </div>
+    <div class="top-bar">CUBECAST</div>
 
-    <!-- VIDEO STACK -->
     <div class="viewport">
-      <video id="player" playsinline muted autoplay></video>
+      <video id="player" playsinline muted></video>
       <div class="swipe-hint">▲ swipe</div>
     </div>
 
-    <!-- CTA BAR -->
     <div class="bottom-bar">
       <a class="pill secondary" href="#">ASMR</a>
       <a class="pill" href="#">Listen on Spotify</a>
@@ -136,11 +126,8 @@
 
   </div>
 
-  <!-- CTA INJECTION FRAME -->
   <div id="cta-frame"></div>
 
-  <!-- CORE LOGIC -->
   <script src="/cubecast/cubecast.js"></script>
-
 </body>
 </html>
