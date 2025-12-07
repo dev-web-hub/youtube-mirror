@@ -1,7 +1,9 @@
 services:
-  - type: static
-    name: mah-relay-engine
+  - type: web
+    name: youtube-mirror
     env: static
-    buildCommand: ""
     staticPublishPath: public
-    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /cubecast/*.js
+        name: Content-Type
+        value: application/javascript
