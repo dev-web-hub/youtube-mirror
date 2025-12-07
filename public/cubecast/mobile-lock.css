@@ -1,0 +1,11 @@
+/* FORCE MOBILE FULLSCREEN MODE */
+@media (min-width: 900px) {
+  body {
+    background: black !important;
+  }
+
+  .phone-frame {
+    transform: scale(1.05);
+    box-shadow: 0 0 120px rgba(0,0,0,1);
+  }
+}

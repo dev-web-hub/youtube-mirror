@@ -1,0 +1,13 @@
+.cubecast-logo {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 64px;
+  opacity: 0;
+  animation: cubeFade 2.4s ease forwards;
+  z-index: 5;
+}
+
+@keyframes cubeFade {
+  to { opacity: 0.85; }
+}

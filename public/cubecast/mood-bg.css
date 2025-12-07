@@ -1,0 +1,11 @@
+.viewport[data-mood="tech"]::before {
+  background-image: url("/cubecast/chessboard.jpg");
+}
+
+.viewport[data-mood="calm"]::before {
+  background-image: url("/cubecast/C_B1 copy.jpg");
+}
+
+.viewport[data-mood="dark"]::before {
+  background-image: url("/cubecast/C_B2 copy.jpg");
+}

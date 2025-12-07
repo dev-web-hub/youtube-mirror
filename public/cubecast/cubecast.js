@@ -9,6 +9,7 @@ const ctaFrame = document.getElementById("cta-frame");
 player.muted = true;
 player.setAttribute("playsinline", "");
 player.setAttribute("webkit-playsinline", "");
+player.playbackRate = 1.25;
 
 fetch("/cubecast/feed.json")
   .then(r => r.json())
@@ -16,15 +17,8 @@ fetch("/cubecast/feed.json")
     feed = data.videos;
     window.CTA_AFTER = data.inject_after_swipes || 22;
     window.CTA_URL = data.cta_url || "/products/xreal-one/";
-    loadVideo(0);
+    player.src = feed[0];
   });
-
-function loadVideo(i) {
-  if (!feed[i]) return;
-  player.src = feed[i];
-  player.load();
-  if (unlocked) player.play();
-}
 
 function unlockPlayback() {
   if (unlocked) return;
@@ -34,6 +28,7 @@ function unlockPlayback() {
 }
 
 document.body.addEventListener("click", unlockPlayback, { once: true });
+document.body.addEventListener("touchstart", unlockPlayback, { once: true });
 
 function nextVideo() {
   swipeCount++;
@@ -45,7 +40,9 @@ function nextVideo() {
 
   index++;
   if (index >= feed.length) index = 0;
-  loadVideo(index);
+
+  player.src = feed[index];
+  player.play();
 }
 
 function showCTA() {
@@ -62,8 +59,4 @@ document.addEventListener("touchstart", e => {
 document.addEventListener("touchend", e => {
   const endY = e.changedTouches[0].clientY;
   if (startY - endY > 40) nextVideo();
-});
-
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowDown" || e.key === " ") nextVideo();
 });
