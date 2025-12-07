@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "id": "dd_c01_0003_en",
+    "brand": "deluxedeals",
+    "campaign_id": "c01",
+    "campaign_title": "Household Hacks",
+    "lang": "en"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "image": "https://m.media-amazon.com/images/I/71-charmin.jpg",
+      "eyebrow": "Featured offer",
+      "title": "Charmin Toilet Paper",
+      "subtitle": "Hand-picked from our “Household Hacks” collection. As an affiliate, I may earn a commission from qualifying purchases."
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://deluxedeals.ca/go/dd_c01_0003"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_10",
+  "lang": "en",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "DeluxeDeals pick",
+      "title": "Dawn Powerwash Dish Spray",
+      "subtitle": "Featured offer"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Dawn Powerwash Dish Spray",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/42dKnuS"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "shop_now": {
+    "en": "Shop Now",
+    "fr": "Magasiner",
+    "es": "Comprar ahora",
+    "zh": "立即购买",
+    "hi": "अभी खरीदें",
+    "tl": "Mamili ngayon",
+    "ja": "今すぐ購入",
+    "ko": "지금 구매하기",
+    "ar": "تسوق الآن"
+  },
+  "featured_offer": {
+    "en": "Featured Offer",
+    "fr": "Offre en vedette",
+    "es": "Oferta destacada",
+    "zh": "精选优惠",
+    "hi": "विशेष ऑफ़र",
+    "tl": "Tampok na Alok",
+    "ja": "おすすめオファー",
+    "ko": "추천 상품",
+    "ar": "عرض مميز"
+  }
+}

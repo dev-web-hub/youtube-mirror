@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "id": "dd_c17_0002_en",
+    "brand": "deluxedeals",
+    "campaign_id": "c17",
+    "campaign_title": "Joie by Lise — Cards & Digital Products",
+    "lang": "en"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "image": "https://joiebylise.com/cdn/shop/files/ThankYouTeacherFRcopy.jpg",
+      "eyebrow": "Featured offer",
+      "title": "Merci Prof – Teacher Card",
+      "subtitle": "Hand-picked from our “Joie by Lise — Cards & Digital Products” collection. As an affiliate, I may earn a commission from qualifying purchases."
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://deluxedeals.ca/go/dd_c17_0002"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_01",
+  "lang": "en",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "DeluxeDeals pick",
+      "title": "Swiffer PowerMop",
+      "subtitle": "Featured offer"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Swiffer PowerMop",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/46yLiY8"
+    }
+  ]
+}

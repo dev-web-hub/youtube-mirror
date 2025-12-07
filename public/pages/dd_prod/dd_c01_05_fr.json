@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_05",
+  "lang": "fr",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Sélection DeluxeDeals",
+      "title": "Pixel Buds Pro 2",
+      "subtitle": "Offre vedette"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Pixel Buds Pro 2",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Acheter maintenant",
+      "href": "https://amzn.to/46Kqddp"
+    }
+  ]
+}

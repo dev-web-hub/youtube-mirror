@@ -1,0 +1,23 @@
+{
+  "id": "dd_test01",
+  "brand": "deluxedeals",
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Test Deal",
+      "subtitle": "This is only a test page"
+    },
+    {
+      "type": "product_grid",
+      "heading": "Featured Offer",
+      "items": [
+        { "title": "Sample Product", "price": "$19.99" }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop Now",
+      "href": "https://amzn.to/46yLiY8"
+    }
+  ]
+}

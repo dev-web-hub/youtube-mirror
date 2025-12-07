@@ -1,0 +1,62 @@
+[
+  {
+    "campaign": "c01",
+    "name": "Swiffer PowerMop",
+    "url": "https://amzn.to/46yLiY8",
+    "image": "https://m.media-amazon.com/images/I/71L3E7y3QeL._AC_SL1500_.jpg"
+  },
+  {
+    "campaign": "c01",
+    "name": "Gain Laundry Detergent",
+    "url": "https://amzn.to/3BDetergent",
+    "image": "https://m.media-amazon.com/images/I/81L-Detergent.jpg"
+  },
+  {
+    "campaign": "c01",
+    "name": "Charmin Toilet Paper",
+    "url": "https://amzn.to/3CToiletPaper",
+    "image": "https://m.media-amazon.com/images/I/71-charmin.jpg"
+  },
+  {
+    "campaign": "c01",
+    "name": "Stanley Tumbler",
+    "url": "https://amzn.to/StanleyCup",
+    "image": "https://m.media-amazon.com/images/I/71-stanley.jpg"
+  },
+  {
+    "campaign": "c01",
+    "name": "Amazon Basics Batteries",
+    "url": "https://amzn.to/BasicsAA",
+    "image": "https://m.media-amazon.com/images/I/71-batteries.jpg"
+  },
+  {
+    "campaign": "c17",
+    "name": "Happy Nowruz – Greeting Card",
+    "url": "https://joiebylise.com/products/happy-nowruz",
+    "image": "https://joiebylise.com/cdn/shop/files/NowruzFarcicopy4.jpg"
+  },
+  {
+    "campaign": "c17",
+    "name": "Merci Prof – Teacher Card",
+    "url": "https://joiebylise.com/products/merci-prof",
+    "image": "https://joiebylise.com/cdn/shop/files/ThankYouTeacherFRcopy.jpg"
+  },
+  {
+    "campaign": "c17",
+    "name": "Luxury Match Jars",
+    "url": "https://joiebylise.com/products/luxury-match-jars-pots-d-allumettes-de-luxe",
+    "image": "https://joiebylise.com/cdn/shop/files/IMG_5186.jpg"
+  },
+  {
+    "campaign": "c17",
+    "name": "Merci Greeting Card",
+    "url": "https://joiebylise.com/products/merci",
+    "image": "https://joiebylise.com/cdn/shop/files/Neutral_Minimalist_Artist_Designer_Business_Card.jpg"
+  },
+  {
+    "campaign": "c17",
+    "name": "Fête des Pères – Father's Day Card",
+    "url": "https://joiebylise.com/products/fete-des-peres",
+    "image": "https://joiebylise.com/cdn/shop/files/Neutral_Minimalist_Artist_Designer_Business_Card.jpg"
+  }
+]

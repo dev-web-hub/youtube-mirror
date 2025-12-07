@@ -1,0 +1,44 @@
+def build_page_json(campaign: dict, product: dict, base_id: str, lang: str) -> dict:
+    """
+    Build a single-product affiliate page for the relay engine.
+    Layout: hero + CTA button (mobile-friendly, high intent).
+    """
+
+    # Product name fallback
+    raw_name = product.get("name") or product.get("title") or "Untitled product"
+    product_name = raw_name.strip()
+
+    url = product["url"]
+
+    # Localized labels
+    cta_label = CTA_LABELS.get(lang, CTA_LABELS["en"])
+    eyebrow = EYEBROW_LABELS.get(lang, EYEBROW_LABELS["en"])
+    subtitle_template = SUBTITLE_TEMPLATES.get(lang, SUBTITLE_TEMPLATES["en"])
+
+    subtitle = subtitle_template.format(campaign_title=campaign["title"])
+
+    return {
+        "meta": {
+            "id": base_id,
+            "brand": "deluxedeals",
+            "campaign_id": campaign["id"],
+            "campaign_title": campaign["title"],
+            "lang": lang,
+            "affiliate_program": "amazon_and_partners",
+            "affiliate_tags": ["deluxedealsca-20", "deluxedeals20-20"],
+            "source": "config/campaigns_master.json"
+        },
+        "blocks": [
+            {
+                "type": "hero",
+                "eyebrow": eyebrow,
+                "title": product_name,
+                "subtitle": subtitle
+            },
+            {
+                "type": "cta_button",
+                "label": cta_label,
+                "href": url
+            }
+        ]
+    }

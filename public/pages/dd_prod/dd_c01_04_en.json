@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_04",
+  "lang": "en",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "DeluxeDeals pick",
+      "title": "Stanley Tumbler",
+      "subtitle": "Featured offer"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Stanley Tumbler",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/3Kqmgmt"
+    }
+  ]
+}

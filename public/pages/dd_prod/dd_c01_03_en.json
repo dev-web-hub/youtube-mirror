@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_03",
+  "lang": "en",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "DeluxeDeals pick",
+      "title": "Charmin Toilet Paper",
+      "subtitle": "Featured offer"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Charmin Toilet Paper",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/4pHxYcA"
+    }
+  ]
+}

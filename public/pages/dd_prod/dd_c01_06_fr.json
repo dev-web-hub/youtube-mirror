@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_06",
+  "lang": "fr",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Sélection DeluxeDeals",
+      "title": "Barefoot Contessa Cookbook",
+      "subtitle": "Offre vedette"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Barefoot Contessa Cookbook",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Acheter maintenant",
+      "href": "https://amzn.to/3Kf4ClT"
+    }
+  ]
+}

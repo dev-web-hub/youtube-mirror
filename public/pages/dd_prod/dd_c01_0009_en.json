@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "id": "dd_c01_0009_en",
+    "brand": "deluxedeals",
+    "campaign_id": "c01",
+    "campaign_title": "Household Hacks",
+    "lang": "en"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "Featured offer",
+      "title": "Ziploc Freezer Bags (60 count)",
+      "subtitle": "Hand-picked from our “Household Hacks” collection."
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/3IAsDmO"
+    }
+  ]
+}

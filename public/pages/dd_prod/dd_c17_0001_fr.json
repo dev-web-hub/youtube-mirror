@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "id": "dd_c17_0001_fr",
+    "brand": "deluxedeals",
+    "campaign_id": "c17",
+    "campaign_title": "Joie by Lise — Cards & Digital Products",
+    "lang": "fr"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "image": "https://joiebylise.com/cdn/shop/files/NowruzFarcicopy4.jpg",
+      "eyebrow": "Offre vedette",
+      "title": "Happy Nowruz – Greeting Card",
+      "subtitle": "Choix vedette de notre collection « Joie by Lise — Cards & Digital Products ». En tant que partenaire, je peux recevoir une commission sur les achats admissibles."
+    },
+    {
+      "type": "cta_button",
+      "label": "Magasiner",
+      "href": "https://deluxedeals.ca/go/dd_c17_0001"
+    }
+  ]
+}

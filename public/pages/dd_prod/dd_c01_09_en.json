@@ -1,0 +1,28 @@
+{
+  "brand": "deluxedeals",
+  "page_id": "dd_c01_09",
+  "lang": "en",
+  "layout": "deal_simple",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "DeluxeDeals pick",
+      "title": "Ziploc Freezer Bags (60 count)",
+      "subtitle": "Featured offer"
+    },
+    {
+      "type": "product_feature",
+      "products": [
+        {
+          "title": "Ziploc Freezer Bags (60 count)",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "type": "cta_button",
+      "label": "Shop now",
+      "href": "https://amzn.to/3IAsDmO"
+    }
+  ]
+}
