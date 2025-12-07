@@ -16,14 +16,14 @@ fetch("/cubecast/feed.json")
     feed = data.videos;
     window.CTA_AFTER = data.inject_after_swipes || 22;
     window.CTA_URL = data.cta_url || "/products/xreal-one/";
-    preloadNext();
+    loadVideo(0);
   });
 
-function preloadNext() {
-  if (feed[index]) {
-    player.src = feed[index];
-    player.play().catch(() => {});
-  }
+function loadVideo(i) {
+  if (!feed[i]) return;
+  player.src = feed[i];
+  player.load();
+  if (unlocked) player.play();
 }
 
 function unlockPlayback() {
@@ -38,8 +38,6 @@ document.body.addEventListener("click", unlockPlayback, { once: true });
 function nextVideo() {
   swipeCount++;
 
-  cubeLog("swipe", "cubecast");
-
   if (swipeCount === window.CTA_AFTER) {
     showCTA();
     return;
@@ -47,21 +45,14 @@ function nextVideo() {
 
   index++;
   if (index >= feed.length) index = 0;
-
-  player.src = feed[index];
-  player.play();
+  loadVideo(index);
 }
 
 function showCTA() {
   player.pause();
-  cubeLog("cta_shown", "xreal-one");
-  ctaFrame.innerHTML = `<iframe src="${window.CTA_URL}"></iframe>`;
   ctaFrame.style.display = "flex";
+  ctaFrame.innerHTML = `<iframe src="${window.CTA_URL}"></iframe>`;
 }
-
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowDown" || e.key === " ") nextVideo();
-});
 
 let startY = 0;
 document.addEventListener("touchstart", e => {
@@ -71,4 +62,8 @@ document.addEventListener("touchstart", e => {
 document.addEventListener("touchend", e => {
   const endY = e.changedTouches[0].clientY;
   if (startY - endY > 40) nextVideo();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown" || e.key === " ") nextVideo();
 });
