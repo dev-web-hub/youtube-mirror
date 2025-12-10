@@ -1,0 +1,28 @@
+{
+  "inject_after_swipes": 22,
+  "cta_url": "/products/xreal-one/",
+  "videos": [
+    "/cubecast/videos/video01.mp4",
+    "/cubecast/videos/video02.mp4",
+    "/cubecast/videos/video03.mp4",
+    "/cubecast/videos/video04.mp4",
+    "/cubecast/videos/video05.mp4",
+    "/cubecast/videos/video06.mp4",
+    "/cubecast/videos/video07.mp4",
+    "/cubecast/videos/video08.mp4",
+    "/cubecast/videos/video09.mp4",
+    "/cubecast/videos/video10.mp4",
+    "/cubecast/videos/video11.mp4",
+    "/cubecast/videos/video12.mp4",
+    "/cubecast/videos/video13.mp4",
+    "/cubecast/videos/video14.mp4",
+    "/cubecast/videos/video15.mp4",
+    "/cubecast/videos/video16.mp4",
+    "/cubecast/videos/video17.mp4",
+    "/cubecast/videos/video18.mp4",
+    "/cubecast/videos/video19.mp4",
+    "/cubecast/videos/video20.mp4",
+    "/cubecast/videos/video21.mp4",
+    "/cubecast/videos/video22.mp4"
+  ]
+}

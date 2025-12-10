@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "slug": "xreal-one",
+    "brand": "deluxedeals",
+    "template": "hero_affiliate_v1",
+    "language": "en",
+    "category": "hardware",
+    "tags": ["ar", "glasses", "xreal", "developer-toy"]
+  },
+  "i18n": {
+    "shop_now": {
+      "en": "Shop Now",
+      "fr": "Magasiner",
+      "es": "Comprar ahora",
+      "zh": "立即购买",
+      "hi": "अभी खरीदें",
+      "tl": "Mamili ngayon",
+      "ja": "今すぐ購入",
+      "ko": "지금 구매하기",
+      "ar": "تسوق الآن"
+    },
+    "featured_offer": {
+      "en": "Featured Offer",
+      "fr": "Offre en vedette",
+      "es": "Oferta destacada",
+      "zh": "精选优惠",
+      "hi": "विशेष ऑफ़र",
+      "tl": "Tampok na Alok",
+      "ja": "おすすめオファー",
+      "ko": "추천 상품",
+      "ar": "عرض مميز"
+    }
+  },
+  "blocks": [
+    {
+      "type": "hero_affiliate",
+      "id": "xreal-hero",
+      "badge": "AUGMENTED REALITY",
+      "title_html": "XREAL One AR Glasses<br>(X1 Chip)",
+      "body": "Immersive augmented reality you can wear anywhere. Cinema-size screens. Precision clarity. The future on your face.",
+      "variant_line": "✨ Limited stock available — Ships fast",
+      "image": {
+        "src": "hero.png",
+        "alt": "XREAL One AR Glasses product image",
+        "mode": "contain",
+        "max_height_px": 260
+      },
+      "cta": {
+        "label": "🚀 See The Future Now!",
+        "style": "primary_pill",
+        "tracking_id": "xreal-one-primary-cta"
+      },
+      "routing": {
+        "strategy": "language_prefix_fallback",
+        "default_country": "CA",
+        "links": {
+          "CA": "https://www.amazon.ca/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedealsca-20",
+          "US": "https://www.amazon.com/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedeals20-20"
+        }
+      },
+      "telemetry": {
+        "page_family": "xreal-one",
+        "offer_type": "affiliate-primary",
+        "entrypoint": "youtube-mirror",
+        "priority": 100
+      }
+    }
+  ]
+}

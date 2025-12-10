@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "slug": "youtube-uploader",
+    "brand": "codebuddy",
+    "template": "saas_hero_v1",
+    "language": "en",
+    "category": "software",
+    "tags": ["youtube", "automation", "upload", "creators", "llm-tools"]
+  },
+
+  "i18n": {
+    "shop_now": {
+      "en": "Get Started",
+      "fr": "Commencer",
+      "es": "Comenzar",
+      "zh": "开始使用",
+      "hi": "शुरू करें",
+      "tl": "Magsimula",
+      "ja": "始める",
+      "ko": "시작하기",
+      "ar": "ابدأ الآن"
+    },
+    "featured_offer": {
+      "en": "Creator Automation",
+      "fr": "Automatisation Créateur",
+      "es": "Automatización Creativa",
+      "zh": "创作者工具",
+      "hi": "क्रिएटर ऑटोमेशन",
+      "tl": "Automation para sa Creator",
+      "ja": "クリエイター自動化",
+      "ko": "크리에이터 자동화",
+      "ar": "أتمتة صناع المحتوى"
+    }
+  },
+
+  "blocks": [
+    {
+      "type": "hero_affiliate",
+      "id": "youtube-uploader-hero",
+      "badge": "CREATOR TOOL",
+      "title_html": "YouTube Uploader<br>Automated. Unlimited. Fast.",
+      "body": "Upload 1 or 100 videos with consistent titles, descriptions, tags, thumbnails, and schedules. Token-aware, dual-model optimized, and designed for creators who want *output, not fiddling*.",
+      "variant_line": "⚡ 3-minute setup — No credential sharing required",
+
+      "image": {
+        "src": "hero.png",
+        "alt": "YouTube Uploader Dashboard",
+        "mode": "contain",
+        "max_height_px": 260
+      },
+
+      "cta": {
+        "label": "🚀 Launch Your Upload Engine",
+        "style": "primary_pill",
+        "tracking_id": "youtube-uploader-primary-cta"
+      },
+
+      "routing": {
+        "strategy": "static_url",
+        "links": {
+          "default": "https://codebuddy.marketing/youtube-uploader" 
+        }
+      },
+
+      "telemetry": {
+        "page_family": "youtube-uploader",
+        "offer_type": "saas",
+        "entrypoint": "youtube-mirror",
+        "priority": 100
+      }
+    }
+  ]
+}
