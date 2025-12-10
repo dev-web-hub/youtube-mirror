@@ -7,9 +7,7 @@
   <meta name="description"
         content="Desktop YouTube Shorts uploader with dual-AI metadata, smart scheduling, and token-aware debugging.">
   <style>
-    :root {
-      color-scheme: dark;
-    }
+    :root { color-scheme: dark; }
 
     body {
       margin: 0;
@@ -113,11 +111,6 @@
       gap: 6px;
     }
 
-    .metric-pill strong {
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -126,48 +119,39 @@
       margin-top: 22px;
     }
 
-    .cta-primary {
+    .cta-primary, .cta-secondary {
       flex: 1 1 180px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
       padding: 13px 18px;
       border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      text-align: center;
+    }
+
+    .cta-primary {
       font-size: 15px;
       font-weight: 600;
       color: #020617;
       background: linear-gradient(135deg, #f9fafb, #dbeafe);
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
       box-shadow: 0 14px 35px rgba(59,130,246,0.4);
     }
 
-    .cta-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(59,130,246,0.6);
-    }
+    .cta-primary:hover { transform: translateY(-1px); }
 
     .cta-secondary {
-      flex: 1 1 120px;
-      padding: 11px 14px;
-      border-radius: 999px;
       background: rgba(15,23,42,0.95);
       border: 1px solid rgba(55,65,81,0.9);
       color: #9ca3af;
       font-size: 13px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
     }
 
     .cta-secondary:hover {
       background: rgba(31,41,55,1);
       color: #e5e7eb;
-      border-color: rgba(75,85,99,1);
     }
 
     .footnote {
@@ -175,32 +159,7 @@
       font-size: 11px;
       color: #6b7280;
     }
-
-    @media (max-width: 600px) {
-      .card {
-        padding: 22px 18px 20px 18px;
-        border-radius: 22px;
-      }
-      .hero {
-        height: 220px;
-      }
-      h1 {
-        font-size: 22px;
-      }
-    }
   </style>
-
-  <script>
-    function openCheckout() {
-      // TODO: replace with real Stripe payment link
-      window.location.href = "https://example.com/checkout/uploader-pro";
-    }
-
-    function scrollToDemo() {
-      const el = document.getElementById("demo");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  </script>
 </head>
 
 <body>
@@ -211,44 +170,45 @@
     </div>
 
     <div class="hero">
-      <img
-        src="hero.png"
-        alt="Multi-Model Uploader Pro desktop interface"
-        onerror="this.style.display='none'"
-      />
+      <img src="hero.png" alt="Multi-Model Uploader Pro desktop interface" />
     </div>
 
     <h1>Upload 100 Shorts in minutes, not hours.</h1>
 
     <div class="subhead">
-      A focused desktop app for serious builders: select a folder of videos, let
-      Claude + GPT generate titles, descriptions, and tags, then batch-upload with
-      token-aware logging and smart scheduling.
+      A focused desktop app for serious builders: select a folder of videos,
+      let Claude + GPT generate titles & descriptions, then batch-upload with
+      smart scheduling and token-aware logging.
     </div>
 
     <div class="metrics-row">
-      <div class="metric-pill"><strong>2</strong> LLMs (Claude + GPT)</div>
+      <div class="metric-pill"><strong>2</strong> LLMs</div>
       <div class="metric-pill"><strong>100+</strong> Shorts per batch</div>
-      <div class="metric-pill"><strong>Human-randomized</strong> schedule</div>
-      <div class="metric-pill"><strong>Local-only</strong> API keys</div>
+      <div class="metric-pill">Human-randomized</div>
+      <div class="metric-pill">Local-only keys</div>
     </div>
 
+    <!-- 🔥 NEW LIVE STRIPE LINKS -->
     <div class="cta-row">
-      <button class="cta-primary" onclick="openCheckout()">
-        <span>🚀 Get Early Access</span>
-      </button>
-      <button class="cta-secondary" onclick="scrollToDemo()">
-        Watch 30s demo script
-      </button>
+      <a class="cta-primary"
+         href="https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00">
+        🚀 Get Early Access — $9
+      </a>
+
+      <a class="cta-secondary"
+         href="https://buy.stripe.com/5kQaEXcXrd4Egjmd1G1gs01">
+        License — $29
+      </a>
+
+      <a class="cta-secondary"
+         href="https://buy.stripe.com/4gM9ATaPjc0Ad7ad1G1gs02">
+        Lifetime — $149
+      </a>
     </div>
 
     <div class="footnote">
-      No cloud lock-in, no SaaS login wall. You own the pipeline, we give you the
-      control surface.
+      No cloud lock-in. No SaaS wall. Local keys. Local logs. Your pipeline.
     </div>
   </div>
-
-  <!-- Anchor for future demo section (can be reused by engine) -->
-  <div id="demo" style="height: 1px;"></div>
 </body>
 </html>
