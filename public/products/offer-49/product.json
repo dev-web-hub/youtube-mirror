@@ -1,0 +1,13 @@
+{
+  "id": "offer-49",
+  "slug": "offer-49",
+  "kind": "direct_service",
+  "status": "private",
+  "price_usd": 49,
+  "primary_domain": "services.deluxedeals.net",
+  "build": {
+    "layout": "offer-49.layout.json",
+    "template": "../_template/template.html",
+    "out": "index.html"
+  }
+}

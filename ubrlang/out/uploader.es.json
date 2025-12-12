@@ -1,0 +1,56 @@
+{
+  "id": "uploader-pro",
+  "type": "product_page",
+  "version": "1.0.0",
+  "meta": {
+    "brand": "Deluxe Digital",
+    "category": "software",
+    "status": "beta",
+    "stripe": {
+      "trial_link": "https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00",
+      "license_link": "https://buy.stripe.com/5kQaEXcXrd4Egjmd1G1gs01",
+      "lifetime_link": "https://buy.stripe.com/4gM9ATaPjc0Ad7ad1G1gs02"
+    },
+    "language": "es",
+    "language_label": "Spanish"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "img": "hero.png",
+      "title": "Sube 100 Shorts en minutos, no horas.",
+      "subtitle": "Claude + GPT dual-metadata engine \u2022 Smart scheduling \u2022 Token-aware logging"
+    },
+    {
+      "type": "badges",
+      "items": [
+        "2 LLMs (Claude + GPT)",
+        "100+ Shorts/Batch",
+        "Human-Randomized Scheduler",
+        "Local-Only Keys",
+        "No SaaS Lock-In"
+      ]
+    },
+    {
+      "type": "cta_group",
+      "primary": {
+        "label": "\ud83d\ude80 Get Early Access \u2014 $9",
+        "href": "https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00"
+      },
+      "secondary": [
+        {
+          "label": "License \u2014 $29",
+          "href": "https://buy.stripe.com/5kQaEXcXrd4Egjmd1G1gs01"
+        },
+        {
+          "label": "Lifetime \u2014 $149",
+          "href": "https://buy.stripe.com/4gM9ATaPjc0Ad7ad1G1gs02"
+        }
+      ]
+    },
+    {
+      "type": "footnote",
+      "text": "You own the pipeline. We give you the control surface."
+    }
+  ]
+}
