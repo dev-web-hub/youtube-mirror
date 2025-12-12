@@ -54,16 +54,32 @@
     <a id="cta-primary" class="cta">Loading…</a>
   </div>
 
-  <script>
-    fetch('./product.json')
-      .then(r => r.json())
-      .then(p => {
-        document.getElementById('cta-primary').href = p.cta.primary.href
-        document.getElementById('cta-primary').textContent = "🚀 Pay $49 — Start Now"
-      })
-      .catch(() => {
-        document.getElementById('cta-primary').textContent = "Temporarily unavailable"
-      })
-  </script>
 </body>
 </html>
+<script>
+(async () => {
+  const btn = document.getElementById("cta-primary");
+
+  try {
+    const res = await fetch(
+      "/products/offer-49/product.json",
+      { cache: "no-store" }
+    );
+
+    if (!res.ok) throw new Error("HTTP " + res.status);
+
+    const p = await res.json();
+
+    if (!p?.cta?.primary?.href) {
+      throw new Error("Missing CTA href");
+    }
+
+    btn.href = p.cta.primary.href;
+    btn.textContent = "🚀 Pay $49 — Start Now";
+  } catch (e) {
+    console.error("[OFFER-49]", e);
+    btn.textContent = "Temporarily unavailable";
+    btn.removeAttribute("href");
+  }
+})();
+</script>
