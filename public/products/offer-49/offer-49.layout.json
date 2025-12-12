@@ -8,10 +8,7 @@
     "category": "service",
     "title": "$49 — Get Paid Today",
     "description": "End-of-day Stripe link + intake page. If it’s not live today, you don’t pay.",
-    "lang": "en",
-    "stripe": {
-      "primary_link": "PASTE_STRIPE_49_LINK_HERE"
-    }
+    "lang": "en"
   },
   "blocks": [
     {
@@ -33,7 +30,7 @@
       "type": "cta_group",
       "primary": {
         "label": "🚀 Pay $49 — Start Now",
-        "href": "https://buy.stripe.com/00wbJ1aPjc0A3wA0eU1gs06"
+        "href": "https://buy.stripe.com/00wbJ1aPjc0A3wA0eU1gs06?utm_source=direct&utm_campaign=offer49"
       },
       "secondary": [
         {
