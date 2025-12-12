@@ -6,11 +6,9 @@
     "brand": "Deluxe Digital",
     "category": "software",
     "status": "beta",
-    "stripe": {
-      "trial_link": "https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00",
-      "license_link": "https://buy.stripe.com/5kQaEXcXrd4Egjmd1G1gs01",
-      "lifetime_link": "https://buy.stripe.com/4gM9ATaPjc0Ad7ad1G1gs02"
-    }
+    "title": "Upload 100 Shorts in minutes, not hours.",
+    "description": "Desktop YouTube Shorts uploader with dual-AI metadata, smart scheduling, and token-aware debugging.",
+    "lang": "en"
   },
   "blocks": [
     {
