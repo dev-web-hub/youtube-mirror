@@ -1,13 +1,9 @@
 {
   "id": "offer-49",
-  "slug": "offer-49",
   "kind": "direct_service",
-  "status": "private",
-  "price_usd": 49,
-  "primary_domain": "services.deluxedeals.net",
-  "build": {
-    "layout": "offer-49.layout.json",
-    "template": "../_template/template.html",
-    "out": "index.html"
+  "cta": {
+    "primary": {
+      "href": "https://buy.stripe.com/00wbJ1aPjc0A3wA0eU1gs06"
+    }
   }
 }
