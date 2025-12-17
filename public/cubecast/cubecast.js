@@ -1,10 +1,7 @@
 (() => {
-  "use strict";
-
   const viewport = document.getElementById("viewport");
   const track = document.getElementById("track");
   const videos = Array.from(track.querySelectorAll("video"));
-  const mask = document.getElementById("transition-mask");
   const cta = document.getElementById("cta");
 
   let feed = [];
@@ -19,37 +16,25 @@
     CTA_URL: "/plp/en/automation-roadmap/"
   };
 
-  function flash(){
-    if(!mask) return;
-    mask.classList.add("active");
-    setTimeout(()=>mask.classList.remove("active"),90);
-  }
-
-  function clamp(i){
-    const n = feed.length;
-    return ((i % n) + n) % n;
-  }
-
-  function slotVideo(slot){
-    return videos.find(v => Number(v.dataset.slot) === slot);
-  }
+  const clamp = i => ((i % feed.length) + feed.length) % feed.length;
+  const bySlot = s => videos.find(v => Number(v.dataset.slot) === s);
 
   function loadSlot(slot, src){
-    const v = slotVideo(slot);
-    if(!v || v.src.endsWith(src)) return;
+    const v = bySlot(slot);
+    if (!v || v.src.endsWith(src)) return;
     v.pause();
     v.src = src;
     v.load();
   }
 
   function sync(){
-    if(!feed.length) return;
+    if (!feed.length) return;
 
     [-2,-1,0,1,2].forEach(s=>{
       loadSlot(s, feed[clamp(idx+s)]);
     });
 
-    const cur = slotVideo(0);
+    const cur = bySlot(0);
     cur.currentTime = 0;
     cur.loop = true;
     cur.muted = !unlocked;
@@ -57,12 +42,12 @@
   }
 
   function advance(dir){
-    if(animating) return;
+    if (animating) return;
     animating = true;
 
     swipes++;
-    if(swipes === STATE.CTA_AFTER){
-      slotVideo(0).pause();
+    if (swipes === STATE.CTA_AFTER){
+      bySlot(0).pause();
       cta.style.display="flex";
       cta.innerHTML = `
         <div class="card">
@@ -73,8 +58,6 @@
       animating=false;
       return;
     }
-
-    flash();
 
     track.style.transition="transform 260ms ease-out";
     track.style.transform=`translateY(${dir*-100}%)`;
@@ -88,20 +71,16 @@
     },{once:true});
   }
 
-  /* unlock audio */
   document.addEventListener("click",()=>{
     unlocked=true;
-    slotVideo(0).muted=false;
+    bySlot(0).muted=false;
   },{once:true});
 
-  /* tap-to-pause */
   viewport.addEventListener("click",()=>{
-    const v = slotVideo(0);
-    if(v.paused) v.play();
-    else v.pause();
+    const v = bySlot(0);
+    v.paused ? v.play() : v.pause();
   });
 
-  /* swipe */
   viewport.addEventListener("touchstart",e=>startY=e.touches[0].clientY,{passive:true});
   viewport.addEventListener("touchend",e=>{
     if(startY==null) return;
@@ -111,13 +90,11 @@
     advance(dy<0?1:-1);
   },{passive:true});
 
-  /* wheel */
   document.addEventListener("wheel",e=>{
     if(Math.abs(e.deltaY)<30) return;
     advance(e.deltaY>0?1:-1);
   },{passive:true});
 
-  /* keyboard */
   document.addEventListener("keydown",e=>{
     if(e.key==="ArrowDown") advance(1);
     if(e.key==="ArrowUp") advance(-1);
@@ -131,89 +108,4 @@
       STATE.CTA_URL = d.cta_url||STATE.CTA_URL;
       sync();
     });
-
-})();
-
-/* === SCALE LOCK (video == board) === */
-(function lockScale(){
-  const viewport = document.getElementById("viewport");
-  function apply(){
-    const w = viewport.clientWidth;
-    const h = viewport.clientHeight;
-    const ratio = 9 / 16;
-
-    let vw, vh;
-    if (w / h > ratio) {
-      vh = h;
-      vw = h * ratio;
-    } else {
-      vw = w;
-      vh = w / ratio;
-    }
-
-    viewport.style.backgroundSize = `${vw}px ${vh}px`;
-  }
-  window.addEventListener("resize", apply);
-  apply();
-})();
-
-/* === PREVENT FIRST-FRAME BLACK === */
-document.querySelectorAll("video").forEach(v=>{
-  v.style.visibility = "hidden";
-  const show = () => {
-    v.style.visibility = "visible";
-    v.removeEventListener("loadeddata", show);
-  };
-  v.addEventListener("loadeddata", show);
-});
-
-/* === SAFE VIDEO REVEAL (no black, no invisibility bug) === */
-document.querySelectorAll("video").forEach(v=>{
-  v.style.opacity = "0";
-  v.style.transition = "opacity 80ms linear";
-
-  const reveal = () => {
-    v.style.opacity = "1";
-    v.removeEventListener("loadeddata", reveal);
-  };
-
-  // If already loaded (common during swaps)
-  if (v.readyState >= 2) {
-    reveal();
-  } else {
-    v.addEventListener("loadeddata", reveal, { once:true });
-  }
-});
-
-/* === TRUE BOARD ⇄ VIDEO SCALE LOCK (9:16) === */
-(function(){
-  const vp = document.getElementById("viewport");
-
-  function sync(){
-    const w = vp.clientWidth;
-    const h = vp.clientHeight;
-    const r = 9/16;
-
-    let bw, bh;
-    if (w/h > r) {
-      bh = h;
-      bw = h*r;
-    } else {
-      bw = w;
-      bh = w/r;
-    }
-
-    vp.style.backgroundSize = `${bw}px ${bh}px`;
-
-    document.querySelectorAll("video").forEach(v=>{
-      v.style.width = `${bw}px`;
-      v.style.height = `${bh}px`;
-      v.style.left = "50%";
-      v.style.top = "50%";
-      v.style.transform = "translate(-50%,-50%)";
-    });
-  }
-
-  window.addEventListener("resize", sync);
-  sync();
 })();
