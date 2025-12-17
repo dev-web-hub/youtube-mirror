@@ -91,3 +91,15 @@ video[data-slot="2"] {top:200%}
   text-decoration:none;
   font-weight:700;
 }
+
+/* === PAINT ORDER FIX === */
+.viewport { position: relative; }
+video { z-index: 2; }
+#track { z-index: 2; }
+.viewport::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: url("/cubecast/chessboard.jpg") center center / cover no-repeat;
+  z-index:1;
+}

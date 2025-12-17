@@ -166,3 +166,54 @@ document.querySelectorAll("video").forEach(v=>{
   };
   v.addEventListener("loadeddata", show);
 });
+
+/* === SAFE VIDEO REVEAL (no black, no invisibility bug) === */
+document.querySelectorAll("video").forEach(v=>{
+  v.style.opacity = "0";
+  v.style.transition = "opacity 80ms linear";
+
+  const reveal = () => {
+    v.style.opacity = "1";
+    v.removeEventListener("loadeddata", reveal);
+  };
+
+  // If already loaded (common during swaps)
+  if (v.readyState >= 2) {
+    reveal();
+  } else {
+    v.addEventListener("loadeddata", reveal, { once:true });
+  }
+});
+
+/* === TRUE BOARD ⇄ VIDEO SCALE LOCK (9:16) === */
+(function(){
+  const vp = document.getElementById("viewport");
+
+  function sync(){
+    const w = vp.clientWidth;
+    const h = vp.clientHeight;
+    const r = 9/16;
+
+    let bw, bh;
+    if (w/h > r) {
+      bh = h;
+      bw = h*r;
+    } else {
+      bw = w;
+      bh = w/r;
+    }
+
+    vp.style.backgroundSize = `${bw}px ${bh}px`;
+
+    document.querySelectorAll("video").forEach(v=>{
+      v.style.width = `${bw}px`;
+      v.style.height = `${bh}px`;
+      v.style.left = "50%";
+      v.style.top = "50%";
+      v.style.transform = "translate(-50%,-50%)";
+    });
+  }
+
+  window.addEventListener("resize", sync);
+  sync();
+})();
