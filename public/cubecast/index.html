@@ -1,102 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>CUBECAST</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
-    body { margin:0; background:#0b0f1a; color:#e5e7eb; font-family:system-ui; overflow:hidden }
-    .frame { max-width:420px; margin:0 auto; height:100vh; display:flex; flex-direction:column }
-    .top { padding:10px; text-align:center; font-weight:600 }
-    .viewport { flex:1; position:relative; background:#000 }
-    video { width:100%; height:100%; object-fit:cover }
-    .hint { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); opacity:.5 }
-    #cta { display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); align-items:center; justify-content:center }
-    .card { background:#111827; padding:24px; border-radius:14px; text-align:center }
-    a { background:#22c55e; color:#000; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600 }
+    :root { color-scheme: dark; }
+    html, body { height:100%; }
+    body {
+      margin:0; background:#000; color:#e5e7eb; font-family:system-ui;
+      overflow:hidden; overscroll-behavior:none;
+      -webkit-user-select:none; user-select:none;
+    }
+    .frame { max-width:420px; margin:0 auto; height:100vh; height:100svh; display:flex; flex-direction:column; }
+    .top { padding:10px; text-align:center; font-weight:650; letter-spacing:.5px; }
+    .viewport { position:relative; flex:1; background:#000; overflow:hidden; touch-action:none; }
+    .stack { position:absolute; inset:0; transform:translateY(0); }
+    video {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; background:#000;
+    }
+    .hint {
+      position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
+      font-size:13px; opacity:.6; background:rgba(0,0,0,.35);
+      padding:6px 10px; border-radius:999px;
+      pointer-events:none;
+    }
+    #cta {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.88); align-items:center; justify-content:center;
+      padding:24px;
+    }
+    .card { max-width:520px; width:100%; background:#111827; padding:22px; border-radius:16px; text-align:center; }
+    .card h2 { margin:0 0 8px 0; }
+    .card p { margin:0 0 16px 0; opacity:.9; }
+    .card a {
+      display:inline-block; background:#22c55e; color:#000;
+      padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:750;
+    }
   </style>
 </head>
 <body>
-
-<div class="frame">
-  <div class="top">CUBECAST</div>
-  <div class="viewport">
-    <video id="player" muted playsinline autoplay></video>
-    <div class="hint">▲ scroll / swipe</div>
+  <div class="frame">
+    <div class="top">CUBECAST</div>
+    <div class="viewport" id="viewport">
+      <div class="stack" id="stack">
+        <video id="vPrev" playsinline muted preload="auto"></video>
+        <video id="vCur"  playsinline muted preload="auto"></video>
+        <video id="vNext" playsinline muted preload="auto"></video>
+      </div>
+      <div class="hint">▲ swipe / wheel / arrows</div>
+    </div>
   </div>
-</div>
 
-<div id="cta"></div>
+  <div id="cta"></div>
 
-<script>
-let feed=[], i=0, swipes=0, unlocked=false;
-const v=document.getElementById("player");
-const cta=document.getElementById("cta");
-
-fetch("/cubecast/feed.json")
-  .then(r=>r.json())
-  .then(d=>{
-    feed=d.videos;
-    window.CTA_AFTER=d.inject_after_swipes;
-    window.CTA_URL=d.cta_url;
-    v.src=feed[0];
-  });
-
-function unlock(){
-  if(unlocked) return;
-  unlocked=true;
-  v.muted=false;
-  v.play();
-}
-
-document.body.addEventListener("click",unlock,{once:true});
-document.body.addEventListener("touchstart",unlock,{once:true});
-
-function nextVideo(){
-  swipes++;
-  if(swipes===window.CTA_AFTER){ showCTA(); return; }
-
-  i = (i + 1) % feed.length;
-
-  v.pause();
-  v.src = feed[i];
-  v.load();
-  v.onloadeddata = () => v.play();
-}
-
-function showCTA(){
-  v.pause();
-  cta.style.display="flex";
-  cta.innerHTML=`<div class="card">
-    <h2>This feed is automated</h2>
-    <p>See how it was built.</p>
-    <a href="${window.CTA_URL}">View roadmap</a>
-  </div>`;
-}
-
-/* mobile swipe */
-let y=0;
-document.addEventListener("touchstart",e=>y=e.touches[0].clientY);
-document.addEventListener("touchend",e=>{
-  if(y-e.changedTouches[0].clientY>40) nextVideo();
-});
-
-/* desktop scroll */
-let wheelLock=false;
-document.addEventListener("wheel",e=>{
-  if(wheelLock) return;
-  if(e.deltaY>30){
-    wheelLock=true;
-    nextVideo();
-    setTimeout(()=>wheelLock=false,400);
-  }
-},{passive:true});
-
-/* keyboard */
-document.addEventListener("keydown",e=>{
-  if(e.key==="ArrowUp"||e.key==="ArrowDown") nextVideo();
-});
-</script>
-
+  <script src="/cubecast/cubecast.js"></script>
 </body>
 </html>
