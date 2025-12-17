@@ -1,19 +1,26 @@
 let feed = [];
-let index = 0;
+let idx = 0;
 let swipes = 0;
 let unlocked = false;
 
-const vPrev = document.getElementById("vPrev");
-const vCur  = document.getElementById("vCur");
-const vNext = document.getElementById("vNext");
-const stack = document.getElementById("stack");
-const cta   = document.getElementById("cta");
+const vids = [
+  document.getElementById("vPrev"),
+  document.getElementById("vCur"),
+  document.getElementById("vNext")
+];
 
-[vPrev, vCur, vNext].forEach(v => {
+const cta = document.getElementById("cta");
+
+vids.forEach(v => {
   v.muted = true;
   v.loop = true;
   v.playsInline = true;
+  v.preload = "auto";
 });
+
+function vid(i) {
+  return vids[(i + vids.length) % vids.length];
+}
 
 fetch("/cubecast/feed.json")
   .then(r => r.json())
@@ -22,8 +29,8 @@ fetch("/cubecast/feed.json")
     window.CTA_AFTER = d.inject_after_swipes || 22;
     window.CTA_URL = d.cta_url || "/products/xreal-one/";
 
-    vCur.src = feed[0];
-    vCur.play();
+    vid(1).src = feed[0];   // current
+    vid(1).play();
 
     preload();
   });
@@ -31,48 +38,39 @@ fetch("/cubecast/feed.json")
 function unlock() {
   if (unlocked) return;
   unlocked = true;
-  [vPrev, vCur, vNext].forEach(v => v.muted = false);
-  vCur.play();
+  vids.forEach(v => v.muted = false);
+  vid(1).play();
 }
 
 document.body.addEventListener("click", unlock, { once:true });
 document.body.addEventListener("touchstart", unlock, { once:true });
 
 function preload() {
-  const prevIndex = (index - 1 + feed.length) % feed.length;
-  const nextIndex = (index + 1) % feed.length;
-
-  vPrev.src = feed[prevIndex];
-  vNext.src = feed[nextIndex];
+  vid(0).src = feed[(idx - 1 + feed.length) % feed.length];
+  vid(2).src = feed[(idx + 1) % feed.length];
 }
 
 function advance(dir = 1) {
   swipes++;
   if (swipes === window.CTA_AFTER) return showCTA();
 
-  index = (index + dir + feed.length) % feed.length;
+  idx = (idx + dir + feed.length) % feed.length;
 
-  // rotate roles without touching current video src
+  // rotate logical window
   if (dir === 1) {
-    const tmp = vPrev;
-    vPrev = vCur;
-    vCur  = vNext;
-    vNext = tmp;
+    vids.push(vids.shift());
   } else {
-    const tmp = vNext;
-    vNext = vCur;
-    vCur  = vPrev;
-    vPrev = tmp;
+    vids.unshift(vids.pop());
   }
 
-  vCur.currentTime = 0;
-  vCur.play();
+  vid(1).currentTime = 0;
+  vid(1).play();
 
   preload();
 }
 
 function showCTA() {
-  vCur.pause();
+  vid(1).pause();
   cta.style.display = "flex";
   cta.innerHTML = `
     <div class="card">
@@ -97,7 +95,7 @@ document.addEventListener("wheel", e => {
   if (Math.abs(e.deltaY) > 30) {
     wheelLock = true;
     advance(e.deltaY > 0 ? 1 : -1);
-    setTimeout(() => wheelLock = false, 250);
+    setTimeout(() => wheelLock = false, 220);
   }
 }, { passive:true });
 
