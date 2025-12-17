@@ -5,3 +5,4 @@ public/**/.DS_Store
 public/tools_backup/
 public/tools/_disabled/
 public/products/cubecast/
+public/tools/validate_layouts.py
