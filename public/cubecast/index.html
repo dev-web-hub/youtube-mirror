@@ -1,17 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>CUBECAST</title>
-  <link rel="stylesheet" href="/cubecast/cubecast.css" />
-  <link rel="icon" href="/cubecast/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/cubecast/cubecast.css"/>
 </head>
 <body>
   <div class="frame">
     <div class="top">CUBECAST</div>
 
-    <div class="viewport" id="viewport" aria-label="doomscroll">
+    <div class="viewport" id="viewport">
       <div id="track">
         <video data-slot="-2" playsinline muted preload="auto"></video>
         <video data-slot="-1" playsinline muted preload="auto"></video>
@@ -20,14 +19,14 @@
         <video data-slot="2"  playsinline muted preload="auto"></video>
       </div>
 
-      <button id="hint" class="hint" type="button" aria-label="hint">
-        ▲ swipe / drag / wheel · tap to pause
-      </button>
+      <!-- transition mask -->
+      <div id="transition-mask"></div>
+
+      <div class="hint">▲ swipe / drag / wheel</div>
     </div>
   </div>
 
-  <div id="cta" role="dialog" aria-modal="true"></div>
-
+  <div id="cta"></div>
   <script src="/cubecast/cubecast.js"></script>
 </body>
 </html>
