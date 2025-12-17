@@ -1,0 +1,11 @@
+video{
+  position:absolute;
+  left:0;
+  width:100%;
+  height:100%;
+
+  /* VIDEO FLASH BACKGROUND (logo, not black) */
+  background: url("/cubecast/LOGO_chessboard.jpg") center center / cover no-repeat;
+
+  object-fit:cover;
+}
