@@ -133,3 +133,36 @@
     });
 
 })();
+
+/* === SCALE LOCK (video == board) === */
+(function lockScale(){
+  const viewport = document.getElementById("viewport");
+  function apply(){
+    const w = viewport.clientWidth;
+    const h = viewport.clientHeight;
+    const ratio = 9 / 16;
+
+    let vw, vh;
+    if (w / h > ratio) {
+      vh = h;
+      vw = h * ratio;
+    } else {
+      vw = w;
+      vh = w / ratio;
+    }
+
+    viewport.style.backgroundSize = `${vw}px ${vh}px`;
+  }
+  window.addEventListener("resize", apply);
+  apply();
+})();
+
+/* === PREVENT FIRST-FRAME BLACK === */
+document.querySelectorAll("video").forEach(v=>{
+  v.style.visibility = "hidden";
+  const show = () => {
+    v.style.visibility = "visible";
+    v.removeEventListener("loadeddata", show);
+  };
+  v.addEventListener("loadeddata", show);
+});
