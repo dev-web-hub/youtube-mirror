@@ -132,3 +132,19 @@
     });
 
 })();
+
+// === PATCH: attach poster before loading video ===
+const _loadSlot = loadSlot;
+loadSlot = function(slot, src){
+  const v = slotVideo(slot);
+  if(!v || v.src.endsWith(src)) return;
+
+  v.pause();
+  v.removeAttribute("src");
+
+  const poster = src.replace('/videos/', '/thumbs/').replace(/\.mp4$/, '.jpg');
+  v.poster = poster;
+
+  v.src = src;
+  v.load();
+};
