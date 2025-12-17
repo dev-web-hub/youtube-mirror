@@ -1,6 +1,5 @@
 :root { color-scheme: dark; }
 html,body{height:100%}
-
 body{
   margin:0;
   background: url("/cubecast/chessboard.jpg") center center / cover no-repeat fixed;
@@ -14,15 +13,12 @@ body{
   max-width:420px;
   margin:0 auto;
   height:100vh;
+  height:100svh;
   display:flex;
   flex-direction:column;
 }
 
-.top{
-  padding:10px;
-  text-align:center;
-  font-weight:650;
-}
+.top{padding:10px;text-align:center;font-weight:650;letter-spacing:.5px}
 
 .viewport{
   position:relative;
@@ -40,20 +36,31 @@ body{
 
 video{
   position:absolute;
-  inset:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
   background: transparent;
-  will-change:transform, opacity;
+  display:block;
 }
 
-/* slot positions */
+/* Slot positioning */
 video[data-slot="-2"]{top:-200%}
 video[data-slot="-1"]{top:-100%}
 video[data-slot="0"] {top:0}
 video[data-slot="1"] {top:100%}
 video[data-slot="2"] {top:200%}
+
+#transition-mask{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  background: url("/cubecast/chessboard.jpg") center center / cover no-repeat;
+  transition: opacity 120ms linear;
+}
+
+#transition-mask.active{ opacity:1; }
 
 .hint{
   position:absolute;
@@ -80,11 +87,16 @@ video[data-slot="2"] {top:200%}
 
 .card{
   background:rgba(17,24,39,.85);
-  backdrop-filter:blur(8px);
+  backdrop-filter: blur(8px);
   padding:22px;
   border-radius:16px;
   text-align:center;
+  max-width:520px;
+  width:100%;
 }
+
+.card h2{ margin:0 0 8px 0; }
+.card p{ margin:0 0 16px 0; opacity:.9; }
 
 .card a{
   background:#22c55e;
@@ -93,4 +105,5 @@ video[data-slot="2"] {top:200%}
   border-radius:12px;
   text-decoration:none;
   font-weight:700;
+  display:inline-block;
 }

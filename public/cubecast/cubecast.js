@@ -97,7 +97,7 @@
     cta.style.display = "flex";
     cta.innerHTML = `
       <div class="card">
-        <h2>This feed is automated</h2>
+        <h2>This feed is AI+Human made</h2>
         <p>See how it was built.</p>
         <a href="${STATE.CTA_URL}">View roadmap</a>
       </div>`;
