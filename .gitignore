@@ -6,3 +6,7 @@ public/tools_backup/
 public/tools/_disabled/
 public/products/cubecast/
 public/tools/validate_layouts.py
+
+# deprecated cubecast generators
+tools/gen_cubecast_feed.copy.sh
+tools/gen_cubecast_feed.old.sh
