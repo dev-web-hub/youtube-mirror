@@ -1,106 +1,132 @@
-let feed = [];
-let idx = 0;
-let swipes = 0;
-let unlocked = false;
+(() => {
+  const track = document.getElementById("track");
+  const viewport = document.getElementById("viewport");
+  const cta = document.getElementById("cta");
+  const vids = [...track.querySelectorAll("video")];
 
-const vids = [
-  document.getElementById("vPrev"),
-  document.getElementById("vCur"),
-  document.getElementById("vNext")
-];
+  let feed = [];
+  let center = 0;
+  let offset = 0;
+  let startY = null;
+  let lastMove = null;
+  let swipes = 0;
+  let unlocked = false;
+  let paused = false;
 
-const cta = document.getElementById("cta");
+  const STATE = {
+    CTA_AFTER: 22,
+    CTA_URL: "/plp/en/automation-roadmap/"
+  };
 
-vids.forEach(v => {
-  v.muted = true;
-  v.loop = true;
-  v.playsInline = true;
-  v.preload = "auto";
-});
+  const slot = n => vids.find(v => +v.dataset.slot === n);
+  const idx = i => (i + feed.length) % feed.length;
 
-function vid(i) {
-  return vids[(i + vids.length) % vids.length];
-}
+  function setSrc(slotN, feedN){
+    const v = slot(slotN);
+    const src = feed[idx(feedN)];
+    if (!v || !src) return;
+    if (v.dataset.src === src) return;
+    v.pause();
+    v.src = src;
+    v.dataset.src = src;
+    v.load();
+  }
 
-fetch("/cubecast/feed.json")
-  .then(r => r.json())
-  .then(d => {
-    feed = d.videos;
-    window.CTA_AFTER = d.inject_after_swipes || 22;
-    window.CTA_URL = d.cta_url || "/products/xreal-one/";
+  function sync(){
+    setSrc(-2, center-2);
+    setSrc(-1, center-1);
+    setSrc( 0, center);
+    setSrc( 1, center+1);
+    setSrc( 2, center+2);
 
-    vid(1).src = feed[0];   // current
-    vid(1).play();
+    vids.forEach(v => v.pause());
+    const cur = slot(0);
+    cur.loop = true;
+    cur.muted = !unlocked;
+    if (!paused) cur.play().catch(()=>{});
+  }
 
-    preload();
+  function commit(dir){
+    swipes++;
+    if (swipes === STATE.CTA_AFTER){
+      slot(0).pause();
+      cta.style.display = "flex";
+      cta.innerHTML = `
+        <div class="card">
+          <h2>This feed is automated</h2>
+          <p>See how it was built.</p>
+          <a href="${STATE.CTA_URL}">View roadmap</a>
+        </div>`;
+      return;
+    }
+
+    center += dir;
+    offset = 0;
+    track.style.transition = "transform 260ms cubic-bezier(.22,.61,.36,1)";
+    track.style.transform = "translateY(0)";
+    sync();
+    setTimeout(()=>track.style.transition="",280);
+  }
+
+  function onMove(y){
+    offset = y - startY;
+    track.style.transform = `translateY(${offset}px)`;
+    lastMove = {y, t: performance.now()};
+  }
+
+  function onEnd(){
+    if (!lastMove) return;
+    const velocity = offset / Math.max(1,(performance.now()-lastMove.t));
+    if (Math.abs(offset) > innerHeight*0.22 || Math.abs(velocity) > 0.6){
+      commit(offset < 0 ? 1 : -1);
+    } else {
+      track.style.transition="transform 160ms ease-out";
+      track.style.transform="translateY(0)";
+      setTimeout(()=>track.style.transition="",180);
+    }
+    startY = null;
+    lastMove = null;
+  }
+
+  /* Tap to pause / resume */
+  viewport.addEventListener("click",()=>{
+    paused = !paused;
+    const v = slot(0);
+    paused ? v.pause() : v.play().catch(()=>{});
   });
 
-function unlock() {
-  if (unlocked) return;
-  unlocked = true;
-  vids.forEach(v => v.muted = false);
-  vid(1).play();
-}
+  viewport.addEventListener("touchstart",e=>{
+    startY = e.touches[0].clientY;
+  },{passive:true});
 
-document.body.addEventListener("click", unlock, { once:true });
-document.body.addEventListener("touchstart", unlock, { once:true });
+  viewport.addEventListener("touchmove",e=>{
+    if(startY!=null) onMove(e.touches[0].clientY);
+  },{passive:true});
 
-function preload() {
-  vid(0).src = feed[(idx - 1 + feed.length) % feed.length];
-  vid(2).src = feed[(idx + 1) % feed.length];
-}
+  viewport.addEventListener("touchend",onEnd,{passive:true});
 
-function advance(dir = 1) {
-  swipes++;
-  if (swipes === window.CTA_AFTER) return showCTA();
+  document.addEventListener("wheel",e=>{
+    commit(e.deltaY>0?1:-1);
+  },{passive:true});
 
-  idx = (idx + dir + feed.length) % feed.length;
+  document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowDown") commit(1);
+    if(e.key==="ArrowUp") commit(-1);
+  });
 
-  // rotate logical window
-  if (dir === 1) {
-    vids.push(vids.shift());
-  } else {
-    vids.unshift(vids.pop());
-  }
+  document.body.addEventListener("click",()=>{
+    if(unlocked) return;
+    unlocked=true;
+    slot(0).muted=false;
+    slot(0).play().catch(()=>{});
+  },{once:true});
 
-  vid(1).currentTime = 0;
-  vid(1).play();
-
-  preload();
-}
-
-function showCTA() {
-  vid(1).pause();
-  cta.style.display = "flex";
-  cta.innerHTML = `
-    <div class="card">
-      <h2>This feed is automated</h2>
-      <p>See how it was built.</p>
-      <a href="${window.CTA_URL}">View roadmap</a>
-    </div>`;
-}
-
-/* touch swipe */
-let startY = 0;
-document.addEventListener("touchstart", e => startY = e.touches[0].clientY);
-document.addEventListener("touchend", e => {
-  const dy = startY - e.changedTouches[0].clientY;
-  if (Math.abs(dy) > 40) advance(dy > 0 ? 1 : -1);
-});
-
-/* wheel */
-let wheelLock = false;
-document.addEventListener("wheel", e => {
-  if (wheelLock) return;
-  if (Math.abs(e.deltaY) > 30) {
-    wheelLock = true;
-    advance(e.deltaY > 0 ? 1 : -1);
-    setTimeout(() => wheelLock = false, 220);
-  }
-}, { passive:true });
-
-/* keyboard */
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowDown") advance(1);
-  if (e.key === "ArrowUp") advance(-1);
-});
+  fetch("/cubecast/feed.json",{cache:"no-store"})
+    .then(r=>r.json())
+    .then(d=>{
+      feed=d.videos||[];
+      STATE.CTA_AFTER=d.inject_after_swipes||STATE.CTA_AFTER;
+      STATE.CTA_URL=d.cta_url||STATE.CTA_URL;
+      sync();
+    });
+})();
