@@ -17,7 +17,7 @@
 
   const STATE = {
     CTA_AFTER: 22,
-    CTA_URL: "/plp/en/automation-roadmap/"
+    CTA_URL: "/products/youtube-uploader/"
   };
 
   function flash(){
