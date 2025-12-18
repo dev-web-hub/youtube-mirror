@@ -224,3 +224,17 @@
     })
     .catch(() => {});
 })();
+
+// === POSTER SYSTEM HOOK ===
+import { wrapVideoWithPoster } from "./_poster_emit.js";
+
+function applyPoster(videoEl) {
+  const src = videoEl.getAttribute("src") || "";
+  if (!src.endsWith(".mp4")) return;
+  wrapVideoWithPoster(videoEl, src);
+}
+
+// Apply poster immediately after video creation
+if (typeof applyPoster === "function") {
+  applyPoster(video);
+}
