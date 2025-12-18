@@ -1,31 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta charset="UTF-8" />
   <title>CUBECAST</title>
-  <link rel="icon" href="/cubecast/favicon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="/cubecast/cubecast.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    }
+    #cubecast-root{
+      max-width:720px;
+      margin:0 auto;
+      padding:12px;
+      display:grid;
+      gap:14px;
+    }
+    .cc-item{
+      border-radius:16px;
+      overflow:hidden;
+      background:#020617;
+    }
+  </style>
 </head>
 <body>
-  <div class="frame">
-    <div class="top">CUBECAST</div>
-
-    <div class="viewport" id="viewport">
-      <div id="track">
-        <video data-slot="-2" playsinline muted preload="auto"></video>
-        <video data-slot="-1" playsinline muted preload="auto"></video>
-        <video data-slot="0"  playsinline muted preload="auto"></video>
-        <video data-slot="1"  playsinline muted preload="auto"></video>
-        <video data-slot="2"  playsinline muted preload="auto"></video>
-      </div>
-
-      <div id="transition-mask" aria-hidden="true"></div>
-      <div class="hint">▲ swipe / drag / wheel</div>
-    </div>
-  </div>
-
-  <div id="cta"></div>
+  <main id="cubecast-root"></main>
   <script src="/cubecast/cubecast.js"></script>
 </body>
 </html>
