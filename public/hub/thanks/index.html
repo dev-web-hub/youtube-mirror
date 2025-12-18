@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CUBECAST · Thanks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root{ color-scheme: dark; }
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px;
+      background: radial-gradient(circle at top, #020617 0, #020617 55%, #020617 100%);
+      color:#e5e7eb; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    }
+    .card{
+      width:100%; max-width:620px; border-radius:26px; padding:26px;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 62%);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(148,163,184,0.08);
+    }
+    h1{ margin:0 0 8px; font-size:26px; color:#f9fafb; }
+    p{ margin:0 0 14px; color:#9ca3af; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:999px;
+      background: rgba(248,250,252,0.92); color:#020617; font-weight:800;
+      text-decoration:none; border:1px solid rgba(148,163,184,0.22);
+    }
+    .btn.secondary{ background: rgba(15,23,42,0.95); color:#cbd5e1; }
+    .small{ color:#6b7280; font-size:12px; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>You're in.</h1>
+    <p id="line">Saved locally for now.</p>
+    <div class="row">
+      <a class="btn" href="/cubecast/">Back to feed</a>
+      <a class="btn secondary" href="/hub/survey/">Quick survey</a>
+      <a class="btn secondary" href="/hub/">Hub</a>
+    </div>
+    <div class="small">Next: wire this to SES + Redis tracking (events + segments) once the pages settle.</div>
+  </div>
+  <script>
+    (function(){
+      try{
+        const email = localStorage.getItem("cb_email");
+        const seg = localStorage.getItem("cb_seg");
+        const line = document.getElementById("line");
+        if (email) line.textContent = "Email captured locally: " + email + (seg ? (" · segment: " + seg) : "");
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>

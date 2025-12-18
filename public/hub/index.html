@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CUBECAST · Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cubecast hub: freebies, survey, offers, and links." />
+  <style>
+    :root{ color-scheme: dark; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      background: radial-gradient(circle at top, #020617 0, #020617 55%, #020617 100%);
+      color:#e5e7eb;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    }
+    .card{
+      width:100%;
+      max-width:780px;
+      border-radius:26px;
+      padding:26px;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 62%);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(148,163,184,0.08);
+    }
+    .toprow{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 13px; border-radius:999px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.45);
+      color:#bae6fd; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    }
+    .pill-dot{ width:6px;height:6px;border-radius:999px;background:#22c55e; box-shadow:0 0 12px rgba(34,197,94,0.85); }
+    h1{ margin:18px 0 8px; font-size:28px; line-height:1.15; color:#f9fafb; }
+    .sub{ margin:0 0 18px; color:#9ca3af; font-size:14px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns:1fr; } }
+    .panel{
+      border-radius:18px;
+      padding:16px;
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(148,163,184,0.14);
+    }
+    .panel h2{ margin:0 0 10px; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:#cbd5e1; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    input[type="email"]{
+      flex:1 1 240px;
+      padding:12px 14px;
+      border-radius:999px;
+      border: 1px solid rgba(148,163,184,0.20);
+      background: rgba(2,6,23,0.75);
+      color:#e5e7eb;
+      outline:none;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      border: 1px solid rgba(148,163,184,0.22);
+      background: rgba(248,250,252,0.92);
+      color:#020617;
+      font-weight:700;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background: rgba(15,23,42,0.95);
+      color:#cbd5e1;
+    }
+    .btn.ghost{
+      background: transparent;
+      color:#9ca3af;
+    }
+    .list{ margin:10px 0 0; padding-left:18px; color:#d1d5db; }
+    .list li{ margin:8px 0; }
+    .small{ color:#6b7280; font-size:12px; margin-top:10px; }
+    .links{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+    .links a{ color:#93c5fd; text-decoration:none; font-size:12px; opacity:.9; }
+    .links a:hover{ opacity:1; text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="toprow">
+      <div class="pill"><span class="pill-dot"></span><span>Cubecast · hub</span></div>
+      <div class="links">
+        <a href="/cubecast/">Back to feed</a>
+        <a href="/privacy-policy/">Privacy</a>
+        <a href="/terms-of-service/">Terms</a>
+        <a href="/home/">Home</a>
+      </div>
+    </div>
+
+    <h1>Pick your lane. Get the free kit.</h1>
+    <p class="sub">One hub link. Trusted navigation. Survey → personalized offers later.</p>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Free newsletter + kit</h2>
+        <form id="emailForm" class="row" autocomplete="on">
+          <input id="email" type="email" required placeholder="you@example.com" />
+          <button class="btn" type="submit">Get free kit</button>
+          <a class="btn secondary" href="/hub/survey/">Quick survey</a>
+        </form>
+        <ul class="list">
+          <li>Free: pipeline notes + templates (email delivery)</li>
+          <li>$1 ebook (later) + course (later)</li>
+          <li>DeluxeDeals store + affiliate products</li>
+        </ul>
+        <div class="small">No spam. One-click unsubscribe. This is a static prototype; capture routes to a local thank-you page.</div>
+      </div>
+
+      <div class="panel">
+        <h2>Direct links</h2>
+        <div class="row">
+          <a class="btn" href="https://deluxedeals.net/">Shop DeluxeDeals</a>
+          <a class="btn secondary" href="https://buymeacoffee.com/">Buy me a coffee</a>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn ghost" href="/products/youtube-uploader/">Uploader Pro</a>
+          <a class="btn ghost" href="/hub/survey/">Take the survey</a>
+        </div>
+        <div class="small">CTA targets can be swapped per variant later (A/B folders or hashed routes).</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const form = document.getElementById("emailForm");
+      const email = document.getElementById("email");
+      const params = new URLSearchParams(location.search);
+      const seg = params.get("seg");
+      if (seg) {
+        try { localStorage.setItem("cb_seg", seg); } catch(e){}
+      }
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        const v = (email.value || "").trim();
+        if (!v) return;
+        try { localStorage.setItem("cb_email", v); } catch(e){}
+        location.href = "/hub/thanks/";
+      });
+    })();
+  </script>
+</body>
+</html>
