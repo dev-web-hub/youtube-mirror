@@ -226,3 +226,7 @@
 
   run();
 })();
+// --- Hub route (static) ---
+import { registerHubRoute } from "./_hub.route.patch.js";
+registerHubRoute(app);
+
