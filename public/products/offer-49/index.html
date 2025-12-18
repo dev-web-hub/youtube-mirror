@@ -21,12 +21,24 @@
     .card{
       width:100%;
       max-width:560px;
-      padding:28px;
+      padding:26px;
       border-radius:26px;
       background:#0f172a;
       box-shadow:0 24px 80px rgba(0,0,0,.8);
     }
-    h1{font-size:26px;margin-bottom:10px}
+    .hero{
+      border-radius:18px;
+      overflow:hidden;
+      margin-bottom:18px;
+      border:1px solid rgba(148,163,184,.25);
+    }
+    video{
+      width:100%;
+      height:auto;
+      display:block;
+      background:#000;
+    }
+    h1{font-size:26px;margin:12px 0}
     ul{padding-left:18px;color:#cbd5e1}
     .cta{
       display:block;
@@ -35,14 +47,27 @@
       border-radius:999px;
       background:#f9fafb;
       color:#020617;
-      font-weight:600;
+      font-weight:700;
       text-align:center;
       text-decoration:none;
     }
+    .cta:disabled{opacity:.5}
   </style>
 </head>
 <body>
   <div class="card">
+
+    <div class="hero">
+      <video
+        src="cta.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata">
+      </video>
+    </div>
+
     <h1>$49 — I’ll make it possible for someone to pay you today.</h1>
     <ul>
       <li>Working Stripe payment link</li>
@@ -54,32 +79,20 @@
     <a id="cta-primary" class="cta">Loading…</a>
   </div>
 
-</body>
-</html>
 <script>
 (async () => {
   const btn = document.getElementById("cta-primary");
-
   try {
-    const res = await fetch(
-      "/products/offer-49/product.json",
-      { cache: "no-store" }
-    );
-
-    if (!res.ok) throw new Error("HTTP " + res.status);
-
+    const res = await fetch("/products/offer-49/product.json",{cache:"no-store"});
+    if (!res.ok) throw new Error();
     const p = await res.json();
-
-    if (!p?.cta?.primary?.href) {
-      throw new Error("Missing CTA href");
-    }
-
     btn.href = p.cta.primary.href;
     btn.textContent = "🚀 Pay $49 — Start Now";
-  } catch (e) {
-    console.error("[OFFER-49]", e);
+  } catch {
     btn.textContent = "Temporarily unavailable";
     btn.removeAttribute("href");
   }
 })();
 </script>
+</body>
+</html>
