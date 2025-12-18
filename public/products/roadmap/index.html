@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Roadmap — Deluxe Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The exact roadmap used to build Cubecast and the automation pipeline." />
+  <style>
+    :root { color-scheme: dark; }
+    body{
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:16px;
+    }
+    .card{
+      width:100%;
+      max-width:620px;
+      padding:28px;
+      border-radius:26px;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 60%);
+      box-shadow: 0 24px 80px rgba(0,0,0,.85);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 13px;
+      border-radius:999px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.5);
+      color:#bae6fd;
+      font-size:11px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .pill-dot{
+      width:6px;height:6px;border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 12px rgba(34,197,94,.9);
+    }
+    .video-wrap{
+      margin:18px 0;
+      border-radius:18px;
+      overflow:hidden;
+      background:#000;
+      border:1px solid rgba(148,163,184,.25);
+    }
+    video{
+      width:100%;
+      height:auto;
+      display:block;
+      background:#000;
+    }
+    h1{ font-size:26px; margin:16px 0 8px; }
+    .sub{ color:#9ca3af; font-size:14px; margin-bottom:16px; }
+    ul{ padding-left:18px; color:#d1d5db; }
+    li{ margin-bottom:8px; }
+    .cta{
+      display:block;
+      margin-top:18px;
+      padding:14px;
+      border-radius:999px;
+      background:#f9fafb;
+      color:#020617;
+      font-weight:700;
+      text-align:center;
+      text-decoration:none;
+    }
+    .foot{
+      margin-top:12px;
+      font-size:11px;
+      color:#6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="pill">
+      <span class="pill-dot"></span>
+      <span>Deluxe Digital · Roadmap</span>
+    </div>
+
+    <div class="video-wrap">
+      <video
+        src="cta.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      ></video>
+    </div>
+
+    <h1>The roadmap behind Cubecast.</h1>
+    <p class="sub">
+      Exact steps, sequencing, and guardrails used to build and ship this system.
+    </p>
+
+    <ul>
+      <li>Infrastructure-first decisions</li>
+      <li>Automation without burnout</li>
+      <li>Real pipelines, not hype</li>
+    </ul>
+
+    <a class="cta" href="https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00">
+      🚀 Get the Roadmap
+    </a>
+
+    <div class="foot">
+      No SaaS. No lock-in. Just the actual plan.
+    </div>
+  </div>
+</body>
+</html>
