@@ -3,48 +3,34 @@ set -euo pipefail
 
 ROOT="/Users/christianboullard/youtube-mirror/public/cubecast"
 VIDDIR="$ROOT/videos"
-THUMBDIR="$ROOT/thumbs"
 OUT="$ROOT/feed.json"
 
+INJECT_AFTER_SWIPES="${INJECT_AFTER_SWIPES:-22}"
+PAGE_SIZE="${PAGE_SIZE:-5}"
+CTA_URL="${CTA_URL:-/hub/}"
+
 cd "$VIDDIR"
+mapfile -t files < <(ls -1 *.mp4 2>/dev/null | LC_ALL=C sort)
 
-mapfile -t vids < <(ls -1 *.mp4 2>/dev/null | LC_ALL=C sort)
-
-if [ "${#vids[@]}" -lt 1 ]; then
+if [ "${#files[@]}" -lt 1 ]; then
   echo "[gen] no mp4 files found in $VIDDIR" >&2
   exit 1
 fi
 
-tmp="$(mktemp)"
 {
   echo '{'
-  echo '  "inject_after_swipes": 22,'
-  echo '  "cta_url": "/hub/",'
-  echo '  "cta_label": "Pick your lane → Hub",'
-  echo '  "items": ['
-  for i in "${!vids[@]}"; do
-    f="${vids[$i]}"
-    base="${f%.mp4}"
-    poster=""
-    if [ -f "$THUMBDIR/$base.jpg" ]; then
-      poster="/cubecast/thumbs/$base.jpg"
-    elif [ -f "$THUMBDIR/$base.png" ]; then
-      poster="/cubecast/thumbs/$base.png"
-    fi
-
+  printf '  "inject_after_swipes": %s,\n' "$INJECT_AFTER_SWIPES"
+  printf '  "page_size": %s,\n' "$PAGE_SIZE"
+  printf '  "cta_url": "%s",\n' "$CTA_URL"
+  echo '  "videos": ['
+  for i in "${!files[@]}"; do
+    f="${files[$i]}"
     comma=","
-    [ "$i" -eq "$((${#vids[@]}-1))" ] && comma=""
-
-    label="$base"
-    printf '    {"video":"%s","poster":"%s","label":"%s"}%s\n' \
-      "/cubecast/videos/$f" \
-      "$poster" \
-      "$label" \
-      "$comma"
+    [ "$i" -eq "$((${#files[@]}-1))" ] && comma=""
+    printf '    "%s"%s\n' "/cubecast/videos/$f" "$comma"
   done
   echo '  ]'
   echo '}'
-} > "$tmp"
+} > "$OUT"
 
-mv "$tmp" "$OUT"
-echo "[gen] wrote $OUT with ${#vids[@]} items"
+echo "[gen] wrote $OUT with ${#files[@]} videos"
