@@ -18,11 +18,10 @@
 
   const STATE = {
     CTA_AFTER: 22,
-    CTA_URL: "/products/xreal-one/"
+    CTA_URL: "/store/"
   };
 
   function flash(){
-    if(!mask) return;
     mask.classList.add("active");
     setTimeout(()=>mask.classList.remove("active"), 90);
   }
@@ -74,13 +73,10 @@
     if(ctaShown) return;
     ctaShown = true;
 
-    cta.style.display = "flex";
+    cta.style.display = "block";
     cta.innerHTML = `
-      <div class="card">
-        <h2>Built automatically</h2>
-        <p>See the system behind this feed.</p>
-        <a href="${STATE.CTA_URL}">View Product</a>
-      </div>`;
+      <a href="${STATE.CTA_URL}" class="cta-pill">Shop</a>
+    `;
   }
 
   function advance(dir){

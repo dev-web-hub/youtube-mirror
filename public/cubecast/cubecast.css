@@ -1,10 +1,11 @@
 :root { color-scheme: dark; }
+
 html,body{height:100%}
 body{
   margin:0;
   background: url("/cubecast/chessboard.jpg") center center / cover no-repeat fixed;
   color:#e5e7eb;
-  font-family:system-ui;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   overflow:hidden;
   overscroll-behavior:none;
 }
@@ -18,7 +19,12 @@ body{
   flex-direction:column;
 }
 
-.top{padding:10px;text-align:center;font-weight:650;letter-spacing:.5px}
+.top{
+  padding:10px;
+  text-align:center;
+  font-weight:650;
+  letter-spacing:.5px;
+}
 
 .viewport{
   position:relative;
@@ -26,6 +32,9 @@ body{
   overflow:hidden;
   touch-action:none;
   background: url("/cubecast/chessboard.jpg") center center / cover no-repeat;
+  border-radius: 18px;
+  margin: 0 10px 10px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(148,163,184,0.10);
 }
 
 #track{
@@ -59,23 +68,46 @@ video[data-slot="2"] {top:200%}
   background: url("/cubecast/chessboard.jpg") center center / cover no-repeat;
   transition: opacity 120ms linear;
 }
-
 #transition-mask.active{ opacity:1; }
 
 .hint{
   position:absolute;
   left:50%;
-  bottom:16px;
+  bottom:14px;
   transform:translateX(-50%);
   font-size:12px;
-  opacity:.6;
+  opacity:.7;
   background:rgba(0,0,0,.35);
   padding:6px 10px;
   border-radius:999px;
   pointer-events:none;
 }
 
-#cta{
+/* Minimal CTA bar that can appear after N swipes (non-blocking) */
+.cta-bar{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:54px;
+  height:44px;
+  border-radius:999px;
+  border: 1px solid rgba(56,189,248,0.45);
+  background: rgba(56,189,248,0.10);
+  color:#bae6fd;
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:750;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  backdrop-filter: blur(8px);
+}
+.cta-bar:hover{ background: rgba(56,189,248,0.16); }
+
+/* Fullscreen CTA modal (optional) */
+.cta-modal{
   display:none;
   position:fixed;
   inset:0;
@@ -84,8 +116,7 @@ video[data-slot="2"] {top:200%}
   justify-content:center;
   padding:24px;
 }
-
-.card{
+.cta-modal .card{
   background:rgba(17,24,39,.85);
   backdrop-filter: blur(8px);
   padding:22px;
@@ -94,16 +125,48 @@ video[data-slot="2"] {top:200%}
   max-width:520px;
   width:100%;
 }
-
-.card h2{ margin:0 0 8px 0; }
-.card p{ margin:0 0 16px 0; opacity:.9; }
-
-.card a{
+.cta-modal .card h2{ margin:0 0 8px 0; }
+.cta-modal .card p{ margin:0 0 16px 0; opacity:.9; }
+.cta-modal .row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.cta-modal a{
   background:#22c55e;
   color:#000;
   padding:10px 16px;
   border-radius:12px;
   text-decoration:none;
-  font-weight:700;
+  font-weight:800;
   display:inline-block;
+}
+.cta-modal .ghost{
+  background: rgba(15,23,42,0.92);
+  color:#cbd5e1;
+  border: 1px solid rgba(148,163,184,0.22);
+}
+
+#cta{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:50;
+  display:none;
+}
+
+.cta-pill{
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(56,189,248,0.18);
+  border:1px solid rgba(56,189,248,0.55);
+  color:#bae6fd;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  backdrop-filter: blur(6px);
 }
