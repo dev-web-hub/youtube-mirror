@@ -1,10 +1,57 @@
 {
-  "title": "XREAL One AR Glasses — See The Future Now",
-  "headline": "XREAL One AR Glasses<br>(X1 Chip)",
-  "description": "Immersive augmented reality you can wear anywhere. Cinema-size screens. Precision clarity. The future on your face.",
-  "cta": "🚀 See The Future Now!",
-  "variant": "Variant: Cosmic Black — CAD801.03",
-
-  "ca_link": "https://www.amazon.ca/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedealsca-20",
-  "us_link": "https://www.amazon.com/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedeals20-20"
+  "meta": {
+    "slug": "xreal-one",
+    "brand": "deluxedeals",
+    "template": "hero_affiliate_v1",
+    "language": "en",
+    "category": "hardware",
+    "tags": ["ar", "glasses", "xreal", "developer-toy"]
+  },
+  "i18n": {
+    "shop_now": {
+      "en": "Shop Now",
+      "fr": "Magasiner",
+      "es": "Comprar ahora"
+    },
+    "featured_offer": {
+      "en": "Featured Offer",
+      "fr": "Offre en vedette",
+      "es": "Oferta destacada"
+    }
+  },
+  "blocks": [
+    {
+      "type": "hero_affiliate",
+      "id": "xreal-hero",
+      "badge": "AUGMENTED REALITY",
+      "title_html": "XREAL One AR Glasses<br>(X1 Chip)",
+      "body": "Immersive augmented reality you can wear anywhere. Cinema-size screens. Precision clarity. The future on your face.",
+      "variant_line": "✨ Limited stock available — Ships fast",
+      "image": {
+        "src": "hero.png",
+        "alt": "XREAL One AR Glasses product image",
+        "mode": "contain",
+        "max_height_px": 260
+      },
+      "cta": {
+        "label": "🚀 See The Future Now!",
+        "style": "primary_pill",
+        "tracking_id": "xreal-one-primary-cta"
+      },
+      "routing": {
+        "strategy": "language_prefix_fallback",
+        "default_country": "CA",
+        "links": {
+          "CA": "https://www.amazon.ca/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedealsca-20",
+          "US": "https://www.amazon.com/XREAL-Glasses-Renowned-Adjustable-Transparency/dp/B0DNFFXG65?tag=deluxedeals20-20"
+        }
+      },
+      "telemetry": {
+        "page_family": "xreal-one",
+        "offer_type": "affiliate-primary",
+        "entrypoint": "youtube-mirror",
+        "priority": 100
+      }
+    }
+  ]
 }
