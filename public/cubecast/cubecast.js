@@ -14,14 +14,14 @@
   let unlocked = false;
   let startY = null;
   let wheelLock = false;
-  let ctaShown = false;
 
   const STATE = {
     CTA_AFTER: 22,
-    CTA_URL: "/store/"
+    CTA_URL: "/products/xreal-one/"
   };
 
   function flash(){
+    if(!mask) return;
     mask.classList.add("active");
     setTimeout(()=>mask.classList.remove("active"), 90);
   }
@@ -36,7 +36,7 @@
   }
 
   function posterFor(src){
-    return src.replace("/videos/","/thumbs/").replace(/\.mp4$/i, ".jpg");
+    return src.replace("/videos/", "/thumbs/").replace(/\.mp4(\?.*)?$/i, ".jpg");
   }
 
   function setSlot(slot, src){
@@ -46,37 +46,31 @@
     v.poster = posterFor(src);
     v.playsInline = true;
     v.preload = "auto";
-    v.muted = true;
 
-    if(v.dataset.src === src) return;
+    if(v.getAttribute("data-src") === src) return;
 
     v.pause();
     v.removeAttribute("src");
     v.load();
+
     v.src = src;
-    v.dataset.src = src;
+    v.setAttribute("data-src", src);
     v.load();
   }
 
   function sync(){
+    if(!feed.length) return;
+
     [-2,-1,0,1,2].forEach(s => setSlot(s, feed[clamp(idx+s)]));
+
     const cur = slotVideo(0);
-    videos.forEach(v => v !== cur && v.pause());
+    videos.forEach(v => { if(v !== cur) v.pause(); });
 
     cur.loop = true;
     cur.muted = !unlocked;
     cur.currentTime = 0;
+
     cur.play().catch(()=>{});
-  }
-
-  function showCTA(){
-    if(ctaShown) return;
-    ctaShown = true;
-
-    cta.style.display = "block";
-    cta.innerHTML = `
-      <a href="${STATE.CTA_URL}" class="cta-pill">Shop</a>
-    `;
   }
 
   function advance(dir){
@@ -84,7 +78,6 @@
     animating = true;
 
     swipes++;
-    if(swipes === STATE.CTA_AFTER) showCTA();
 
     flash();
     track.style.transition = "transform 260ms ease-out";
@@ -99,37 +92,72 @@
     }, { once:true });
   }
 
-  viewport.addEventListener("click", () => {
+  /* ===============================
+     🔑 UNIVERSAL PLAY / PAUSE FIX
+     =============================== */
+
+  function unlockAndToggle(){
+    const cur = slotVideo(0);
+    if(!cur) return;
+
     if(!unlocked){
       unlocked = true;
-      const cur = slotVideo(0);
       cur.muted = false;
+      cur.volume = 1;
       cur.play().catch(()=>{});
+      return;
     }
+
+    if(cur.paused) cur.play().catch(()=>{});
+    else cur.pause();
+  }
+
+  /* Capture taps & clicks EARLY */
+  viewport.addEventListener("pointerdown", (e) => {
+    unlockAndToggle();
   });
 
-  viewport.addEventListener("touchstart", e => {
+  /* Mobile swipe */
+  viewport.addEventListener("touchstart", (e) => {
+    if(!e.touches || !e.touches.length) return;
     startY = e.touches[0].clientY;
   }, { passive:true });
 
-  viewport.addEventListener("touchend", e => {
-    const dy = e.changedTouches[0].clientY - startY;
-    if(Math.abs(dy) > 40) advance(dy < 0 ? 1 : -1);
+  viewport.addEventListener("touchend", (e) => {
+    if(startY == null) return;
+    const endY = e.changedTouches[0].clientY;
+    const dy = endY - startY;
+    startY = null;
+    if(Math.abs(dy) < 40) return;
+    advance(dy < 0 ? 1 : -1);
   }, { passive:true });
 
-  document.addEventListener("wheel", e => {
+  /* Desktop wheel */
+  document.addEventListener("wheel", (e) => {
     if(wheelLock) return;
+    if(Math.abs(e.deltaY) < 30) return;
     wheelLock = true;
     advance(e.deltaY > 0 ? 1 : -1);
-    setTimeout(()=>wheelLock=false,260);
+    setTimeout(() => wheelLock = false, 260);
   }, { passive:true });
 
-  fetch("/cubecast/feed.json",{cache:"no-store"})
-    .then(r=>r.json())
-    .then(d=>{
+  /* Keyboard */
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "ArrowDown") advance(1);
+    if(e.key === "ArrowUp") advance(-1);
+    if(e.key === " ") {
+      e.preventDefault();
+      unlockAndToggle();
+    }
+  });
+
+  fetch("/cubecast/feed.json", { cache:"no-store" })
+    .then(r => r.json())
+    .then(d => {
       feed = d.videos || [];
       STATE.CTA_AFTER = d.inject_after_swipes || STATE.CTA_AFTER;
       STATE.CTA_URL = d.cta_url || STATE.CTA_URL;
       sync();
-    });
+    })
+    .catch(()=>{});
 })();
