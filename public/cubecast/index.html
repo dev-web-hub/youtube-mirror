@@ -8,8 +8,6 @@
 </head>
 <body>
   <div class="frame">
-    <div class="top">CUBECAST</div>
-
     <div class="viewport" id="viewport">
       <div id="track">
         <video data-slot="-2" playsinline muted preload="auto"></video>
@@ -19,14 +17,13 @@
         <video data-slot="2"  playsinline muted preload="auto"></video>
       </div>
 
-      <!-- transition mask -->
       <div id="transition-mask"></div>
-
-      <div class="hint">▲ swipe / drag / wheel</div>
     </div>
   </div>
 
-  <div id="cta"></div>
+  <!-- Subtle persistent HUB button -->
+  <a id="hub-btn" href="/hub/">HUB</a>
+
   <script src="/cubecast/cubecast.js"></script>
 </body>
 </html>
