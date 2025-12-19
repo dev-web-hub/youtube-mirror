@@ -9,7 +9,7 @@
     :root { color-scheme: dark; }
     body{
       margin:0;
-      background:#020617;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
       color:#e5e7eb;
       font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
       display:flex;
@@ -20,51 +20,75 @@
     }
     .card{
       width:100%;
-      max-width:560px;
-      padding:26px;
+      max-width:680px;
+      padding:28px 26px 26px;
       border-radius:26px;
-      background:#0f172a;
-      box-shadow:0 24px 80px rgba(0,0,0,.8);
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 55%);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(148,163,184,0.08);
+      text-align:left;
+      overflow:hidden;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 13px; border-radius:999px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.5);
+      color:#bae6fd;
+      font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .pill-dot{
+      width:6px;height:6px;border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 12px rgba(34,197,94,0.9);
     }
     .hero{
-      border-radius:18px;
-      overflow:hidden;
-      margin-bottom:18px;
-      border:1px solid rgba(148,163,184,.25);
-    }
-    video{
       width:100%;
-      height:auto;
-      display:block;
-      background:#000;
+      height:280px;
+      border-radius:18px;
+      margin-bottom:18px;
+      overflow:hidden;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 70%);
+      border: 1px solid rgba(148,163,184,0.32);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    h1{font-size:26px;margin:12px 0}
-    ul{padding-left:18px;color:#cbd5e1}
+    .hero video{ width:100%; height:100%; object-fit:cover; background:#000; }
+    h1{ font-size:26px; line-height:1.18; margin:0 0 10px; color:#f9fafb; }
+    ul{ padding-left:18px; color:#d1d5db; margin:0 0 16px; }
+    ul li{ margin-bottom:8px; }
     .cta{
-      display:block;
-      margin-top:20px;
-      padding:14px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      padding:13px 18px;
       border-radius:999px;
-      background:#f9fafb;
-      color:#020617;
-      font-weight:700;
-      text-align:center;
       text-decoration:none;
+      cursor:pointer;
+      font-weight:800;
+      background: linear-gradient(135deg,#f9fafb,#dbeafe);
+      color:#020617;
+      box-shadow: 0 14px 35px rgba(59,130,246,0.35);
     }
-    .cta:disabled{opacity:.5}
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .ghost{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:999px;
+      border: 1px solid rgba(148,163,184,0.22);
+      background: rgba(15,23,42,0.92);
+      color:#cbd5e1; text-decoration:none; font-size:13px;
+    }
+    .small{ margin-top:12px; font-size:11px; color:#6b7280; }
   </style>
 </head>
 <body>
   <div class="card">
+    <div class="pill"><span class="pill-dot"></span><span>Deluxe Digital · offer</span></div>
 
     <div class="hero">
-      <video
-        src="cta.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata">
+      <video autoplay muted playsinline loop preload="metadata" poster="hero.png">
+        <source src="cta.mp4" type="video/mp4" />
       </video>
     </div>
 
@@ -76,19 +100,27 @@
       <li>Proof screenshot</li>
     </ul>
 
-    <a id="cta-primary" class="cta">Loading…</a>
+    <div class="row">
+      <a id="cta-primary" class="cta" href="#">Loading…</a>
+      <a class="ghost" href="/hub/">Hub</a>
+      <a class="ghost" href="/cubecast/">Back to feed</a>
+    </div>
+
+    <div class="small">If the CTA says unavailable, product.json is missing or misconfigured.</div>
   </div>
 
 <script>
 (async () => {
   const btn = document.getElementById("cta-primary");
   try {
-    const res = await fetch("/products/offer-49/product.json",{cache:"no-store"});
-    if (!res.ok) throw new Error();
+    const res = await fetch("/products/offer-49/product.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
     const p = await res.json();
+    if (!p?.cta?.primary?.href) throw new Error("Missing CTA href");
     btn.href = p.cta.primary.href;
     btn.textContent = "🚀 Pay $49 — Start Now";
-  } catch {
+  } catch (e) {
+    console.error("[OFFER-49]", e);
     btn.textContent = "Temporarily unavailable";
     btn.removeAttribute("href");
   }

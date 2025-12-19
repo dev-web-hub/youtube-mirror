@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>Roadmap — Deluxe Digital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The exact roadmap used to build Cubecast and the automation pipeline." />
+  <meta name="description" content="Roadmap product page (Stripe buttons).">
   <style>
     :root { color-scheme: dark; }
     body{
       margin:0;
-      background:#020617;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
       color:#e5e7eb;
       font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
       display:flex;
@@ -20,101 +20,109 @@
     }
     .card{
       width:100%;
-      max-width:620px;
-      padding:28px;
+      max-width:680px;
+      padding:28px 26px 26px;
       border-radius:26px;
-      background: radial-gradient(circle at top left, #0f172a 0, #020617 60%);
-      box-shadow: 0 24px 80px rgba(0,0,0,.85);
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 55%);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(148,163,184,0.08);
+      text-align:left;
+      overflow:hidden;
     }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 13px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 13px; border-radius:999px;
       background: rgba(56,189,248,0.08);
       border: 1px solid rgba(56,189,248,0.5);
       color:#bae6fd;
-      font-size:11px;
-      letter-spacing:0.16em;
-      text-transform:uppercase;
+      font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
       margin-bottom:14px;
     }
     .pill-dot{
       width:6px;height:6px;border-radius:999px;
       background:#22c55e;
-      box-shadow:0 0 12px rgba(34,197,94,.9);
+      box-shadow:0 0 12px rgba(34,197,94,0.9);
     }
-    .video-wrap{
-      margin:18px 0;
-      border-radius:18px;
-      overflow:hidden;
-      background:#000;
-      border:1px solid rgba(148,163,184,.25);
-    }
-    video{
+    .hero{
       width:100%;
-      height:auto;
-      display:block;
-      background:#000;
+      height:280px;
+      border-radius:18px;
+      margin-bottom:18px;
+      overflow:hidden;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 70%);
+      border: 1px solid rgba(148,163,184,0.32);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    h1{ font-size:26px; margin:16px 0 8px; }
-    .sub{ color:#9ca3af; font-size:14px; margin-bottom:16px; }
-    ul{ padding-left:18px; color:#d1d5db; }
-    li{ margin-bottom:8px; }
-    .cta{
-      display:block;
-      margin-top:18px;
-      padding:14px;
+    .hero video{ width:100%; height:100%; object-fit:cover; background:#000; }
+    h1{ font-size:26px; line-height:1.18; margin:0 0 8px; color:#f9fafb; }
+    .subhead{ font-size:14px; color:#9ca3af; margin-bottom:18px; }
+    .bullets{ margin:0 0 18px 0; padding-left:18px; color:#d1d5db; }
+    .bullets li{ margin-bottom:8px; }
+    .cta-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; }
+    .cta-primary,.cta-secondary{
+      flex:1 1 180px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      padding:13px 18px;
       border-radius:999px;
-      background:#f9fafb;
-      color:#020617;
-      font-weight:700;
-      text-align:center;
       text-decoration:none;
+      cursor:pointer;
+      transition:transform .1s ease, box-shadow .1s ease;
+      text-align:center;
     }
-    .foot{
-      margin-top:12px;
-      font-size:11px;
-      color:#6b7280;
+    .cta-primary{
+      font-size:15px;
+      font-weight:600;
+      color:#020617;
+      background: linear-gradient(135deg,#f9fafb,#dbeafe);
+      box-shadow: 0 14px 35px rgba(59,130,246,0.4);
     }
+    .cta-primary:hover{ transform:translateY(-1px); }
+    .cta-secondary{
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.9);
+      color:#9ca3af;
+      font-size:13px;
+    }
+    .cta-secondary:hover{ background:rgba(31,41,55,1); color:#e5e7eb; }
+    .footnote{ margin-top:14px; font-size:11px; color:#6b7280; }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="pill">
-      <span class="pill-dot"></span>
-      <span>Deluxe Digital · Roadmap</span>
+    <div class="pill"><span class="pill-dot"></span><span>Deluxe Digital · roadmap</span></div>
+
+    <div class="hero">
+      <video autoplay muted playsinline loop preload="metadata" poster="hero.png">
+        <source src="cta.mp4" type="video/mp4" />
+      </video>
     </div>
 
-    <div class="video-wrap">
-      <video
-        src="cta.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-      ></video>
-    </div>
+    <h1>Uploader-Pro Roadmap</h1>
+    <div class="subhead">Quietly serious execution: CLI-first, token-aware logging, batch pipelines.</div>
 
-    <h1>The roadmap behind Cubecast.</h1>
-    <p class="sub">
-      Exact steps, sequencing, and guardrails used to build and ship this system.
-    </p>
-
-    <ul>
-      <li>Infrastructure-first decisions</li>
-      <li>Automation without burnout</li>
-      <li>Real pipelines, not hype</li>
+    <ul class="bullets">
+      <li>Weekly roadmap drops (what’s shipping next)</li>
+      <li>CLI deliverables first, GUI later</li>
+      <li>Reusable templates + scripts</li>
     </ul>
 
-    <a class="cta" href="https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00">
-      🚀 Get the Roadmap
-    </a>
+    <div class="cta-row">
+      <a class="cta-primary" href="https://buy.stripe.com/5kQbJ1f5z7Kkd7a7Hm1gs00">🚀 Get Early Access — $9</a>
+      <a class="cta-secondary" href="https://buy.stripe.com/5kQaEXcXrd4Egjmd1G1gs01">License — $29</a>
+      <a class="cta-secondary" href="https://buy.stripe.com/4gM9ATaPjc0Ad7ad1G1gs02">Lifetime — $149</a>
+    </div>
 
-    <div class="foot">
-      No SaaS. No lock-in. Just the actual plan.
+    <div class="footnote">
+      <a href="/hub/" style="color:#93c5fd;text-decoration:none;">Hub</a>
+      ·
+      <a href="/privacy-policy/" style="color:#93c5fd;text-decoration:none;">Privacy</a>
+      ·
+      <a href="/terms-of-service/" style="color:#93c5fd;text-decoration:none;">Terms</a>
+      ·
+      <a href="/cubecast/" style="color:#93c5fd;text-decoration:none;">Back to feed</a>
     </div>
   </div>
 </body>

@@ -1,4 +1,8 @@
-// === POSTER ATTACHMENT (no black flash, per-video thumbs) ===
-function posterFor(src){
-  return src.replace('/videos/', '/thumbs/').replace(/\.mp4$/, '.jpg');
-}
+// Poster logic intentionally disabled.
+// Posters are handled ONLY via CSS variables.
+// This file exists to prevent regressions.
+EOFv
+cat <<'EOF' > /Users/christianboullard/youtube-mirror/public/cubecast/_poster.patch.js
+// Poster logic intentionally disabled.
+// Posters are handled ONLY via CSS variables.
+// This file exists to prevent regressions.

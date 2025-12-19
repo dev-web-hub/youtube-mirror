@@ -86,3 +86,13 @@
   </script>
 </body>
 </html>
+<script type="module">
+import { writeSurveyEvent } from "./_survey.redis.js";
+try {
+  writeSurveyEvent({
+    ts: Date.now().toString(),
+    ua: navigator.userAgent.slice(0,120),
+    ref: document.referrer || "direct"
+  });
+} catch(e){}
+</script>
