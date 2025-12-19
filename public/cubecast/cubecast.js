@@ -1,217 +1,198 @@
-/* Cubecast doomscroll — mobile-safe, sound-on-gesture, swipe enabled */
-(function(){
-  const STACK = document.getElementById("cb-stack");
+(() => {
+  "use strict";
 
-  const state = {
-    feed: null,
-    idx: 0,
-    shown: 0,
-    pageSize: 5,
-    injectAfter: 22,
-    ctaUrl: "/cubecast/",
-    ctaInjected: false,
-    cards: [],
-    audioEnabled: false
+  const viewport = document.getElementById("viewport");
+  const track = document.getElementById("track");
+  const videos = Array.from(track.querySelectorAll("video"));
+  const mask = document.getElementById("transition-mask");
+  const cta = document.getElementById("cta");
+
+  let feed = [];
+  let idx = 0;
+  let swipes = 0;
+  let animating = false;
+  let unlocked = false;
+  let startY = null;
+  let wheelLock = false;
+
+  const STATE = {
+    CTA_AFTER: 22,
+    CTA_URL: "/products/youtube-uploader/"
   };
 
-  function posterFor(videoUrl){
-    return videoUrl
-      .replace("/videos/","/thumbs/")
-      .replace(/\.mp4(\?.*)?$/i, ".jpg$1");
+  function flash(){
+    if(!mask) return;
+    mask.classList.add("active");
+    setTimeout(()=>mask.classList.remove("active"), 90);
   }
 
-  function el(tag, cls){
-    const n = document.createElement(tag);
-    if (cls) n.className = cls;
-    return n;
+  function clamp(i){
+    const n = feed.length;
+    return ((i % n) + n) % n;
   }
 
-  function enableAudio(video){
-    if (state.audioEnabled) return;
-    state.audioEnabled = true;
-    video.muted = false;
-    video.volume = 1;
-    video.play().catch(()=>{});
+  function slotVideo(slot){
+    return videos.find(v => Number(v.dataset.slot) === slot);
   }
 
-  function mkVideoCard(videoUrl){
-    const card = el("div","cb-card");
-    const frame = el("div","cb-frame");
+  function posterFor(src){
+    // "/cubecast/videos/<name>.mp4" -> "/cubecast/thumbs/<name>.jpg"
+    if(!src) return "";
+    return src.replace("/videos/", "/thumbs/").replace(/\.mp4(\?.*)?$/i, ".jpg");
+  }
 
-    const v = document.createElement("video");
-    v.className = "cb-media";
-    v.setAttribute("playsinline","");
-    v.muted = true;
-    v.loop = true;
-    v.autoplay = true;
-    v.preload = "metadata";
-    v.poster = posterFor(videoUrl);
+  function setSlot(slot, src){
+    const v = slotVideo(slot);
+    if(!v || !src) return;
 
-    const src = document.createElement("source");
-    src.src = videoUrl;
-    src.type = "video/mp4";
-    v.appendChild(src);
+    // Always set poster (even if src didn't change) so the flash uses per-video thumbnail
+    const p = posterFor(src);
+    if(p) v.poster = p;
 
-    // poster stays until video is ready
-    v.style.opacity = "0";
-    v.addEventListener("canplay", () => {
-      v.style.transition = "opacity 120ms ease";
-      v.style.opacity = "1";
+    const cur = slotVideo(0);
+    const isCur = (v === cur);
+
+    v.playsInline = true;
+    v.preload = "auto";
+
+    // Keep buffers silent; current is controlled below
+    if(!isCur) v.muted = true;
+
+    // Avoid redundant reloads
+    if(v.getAttribute("data-src") === src) return;
+
+    v.pause();
+    v.removeAttribute("src");
+    v.load();
+
+    v.src = src;
+    v.setAttribute("data-src", src);
+    v.load();
+  }
+
+  function sync(){
+    if(!feed.length) return;
+
+    [-2,-1,0,1,2].forEach(s => setSlot(s, feed[clamp(idx+s)]));
+
+    const cur = slotVideo(0);
+    videos.forEach(v => { if(v !== cur) v.pause(); });
+
+    cur.loop = true;
+    cur.muted = !unlocked;
+
+    // If unlocked, guarantee audible playback
+    if(unlocked){
+      cur.muted = false;
+      cur.volume = 1;
+    }
+
+    cur.currentTime = 0;
+    cur.play().catch(()=>{});
+  }
+
+  function showCTA(){
+    const cur = slotVideo(0);
+    cur.pause();
+    cta.style.display = "flex";
+    cta.innerHTML = `
+      <div class="card">
+        <h2>This feed is automated</h2>
+        <p>See how it was built.</p>
+        <a href="${STATE.CTA_URL}">View roadmap</a>
+      </div>`;
+  }
+
+  function advance(dir){
+    if(animating || !feed.length) return;
+    animating = true;
+
+    swipes++;
+    if(swipes === STATE.CTA_AFTER){
+      animating = false;
+      showCTA();
+      return;
+    }
+
+    flash();
+
+    track.style.transition = "transform 260ms ease-out";
+    track.style.transform = `translateY(${dir * -100}%)`;
+
+    track.addEventListener("transitionend", () => {
+      track.style.transition = "none";
+      track.style.transform = "translateY(0)";
+      idx = clamp(idx + dir);
+      sync();
+      animating = false;
     }, { once:true });
-
-    // tap = sound on/off
-    v.addEventListener("click", () => {
-      if (!state.audioEnabled) enableAudio(v);
-      else if (v.paused) v.play();
-      else v.pause();
-    });
-
-    const bottom = el("div","cb-bottom");
-    const chiprow = el("div","cb-chiprow");
-
-    const chip = el("div","cb-chip");
-    chip.textContent = "cubecast";
-
-    const btn = el("a","cb-btn secondary");
-    btn.href = "/cubecast/";
-    btn.textContent = "CubeCast";
-
-    chiprow.appendChild(chip);
-    chiprow.appendChild(btn);
-
-    const hint = el("div","cb-hint");
-    hint.textContent = "Swipe up/down or tap for sound.";
-
-    bottom.appendChild(chiprow);
-    bottom.appendChild(hint);
-
-    frame.appendChild(v);
-    frame.appendChild(bottom);
-    card.appendChild(frame);
-
-    card.__video = v;
-    card.__type = "video";
-    return card;
   }
 
-  function mkCtaCard(){
-    const card = el("div","cb-card");
-    const frame = el("div","cb-frame");
-
-    const box = el("div","cb-cta");
-    const h2 = document.createElement("h2");
-    h2.textContent = "Explore CubeCast";
-    const p = document.createElement("p");
-    p.textContent = "Products, newsletter, and experiments.";
-
-    const row = el("div","cb-chiprow");
-    const a1 = el("a","cb-btn");
-    a1.href = "/cubecast/";
-    a1.textContent = "CubeCast";
-
-    row.appendChild(a1);
-    box.appendChild(h2);
-    box.appendChild(p);
-    box.appendChild(row);
-
-    frame.appendChild(box);
-    card.appendChild(frame);
-
-    card.__type = "cta";
-    return card;
-  }
-
-  function mount(card){
-    STACK.appendChild(card);
-    state.cards.push(card);
-    focusTop();
-  }
-
-  function unmountBottom(){
-    if (state.cards.length <= 2) return;
-    const old = state.cards.shift();
-    if (old?.__video) old.__video.pause();
-    old.remove();
-  }
-
-  function focusTop(){
-    state.cards.forEach((c,i)=>{
-      c.style.zIndex = 100 + i;
-      c.style.transform = "translateY(0)";
-      c.style.opacity = "1";
-    });
-    const top = state.cards[state.cards.length - 1];
-    if (top?.__video) top.__video.play().catch(()=>{});
-  }
-
-  function swipe(dir){
-    const top = state.cards[state.cards.length - 1];
-    if (!top) return;
-
-    top.style.transition = "transform 180ms ease, opacity 180ms ease";
-    top.style.transform = `translateY(${dir > 0 ? "-110%" : "110%"})`;
-    top.style.opacity = "0";
-
-    setTimeout(()=>{
-      if (top.__video) top.__video.pause();
-      top.remove();
-      state.cards.pop();
-
-      if (top.__type === "video") state.shown++;
-
-      if (!state.ctaInjected && state.shown >= state.injectAfter){
-        state.ctaInjected = true;
-        mount(mkCtaCard());
-      }
-
-      ensureQueue();
-      focusTop();
-    },200);
-  }
-
-  function ensureQueue(){
-    while (state.cards.length < 3){
-      if (state.idx >= state.feed.videos.length) state.idx = 0;
-      mount(mkVideoCard(state.feed.videos[state.idx++]));
-      unmountBottom();
+  function unlockAudio(){
+    if(unlocked) return;
+    unlocked = true;
+    const cur = slotVideo(0);
+    if(cur){
+      cur.muted = false;
+      cur.volume = 1;
+      cur.play().catch(()=>{});
     }
   }
 
-  function bindGestures(){
-    let y0 = null;
-    window.addEventListener("touchstart", e => y0 = e.touches[0].clientY);
-    window.addEventListener("touchend", e => {
-      if (y0 === null) return;
-      const dy = e.changedTouches[0].clientY - y0;
-      if (Math.abs(dy) > 40) swipe(dy < 0 ? 1 : -1);
-      y0 = null;
-    });
-
-    window.addEventListener("wheel", e => {
-      if (Math.abs(e.deltaY) > 30) swipe(e.deltaY > 0 ? 1 : -1);
-    });
-
-    window.addEventListener("keydown", e => {
-      if (e.key === "ArrowUp") swipe(1);
-      if (e.key === "ArrowDown") swipe(-1);
-    });
+  function togglePause(){
+    const cur = slotVideo(0);
+    if(!cur) return;
+    if(cur.paused) cur.play().catch(()=>{});
+    else cur.pause();
   }
 
-  async function boot(){
-    const res = await fetch("/cubecast/feed.json",{cache:"no-store"});
-    state.feed = await res.json();
-    state.pageSize = state.feed.page_size || 5;
-    state.injectAfter = state.feed.inject_after_swipes || 22;
-
-    for (let i=0;i<state.pageSize;i++){
-      mount(mkVideoCard(state.feed.videos[state.idx++]));
-      unmountBottom();
-    }
-    bindGestures();
-    focusTop();
-  }
-
-  boot().catch(e=>{
-    console.error("[cubecast]",e);
+  // Single tap: first tap unlocks audio; subsequent taps toggle pause
+  viewport.addEventListener("click", () => {
+    if(!unlocked) unlockAudio();
+    else togglePause();
   });
+
+  // Mobile swipe
+  viewport.addEventListener("touchstart", (e) => {
+    if(!e.touches || !e.touches.length) return;
+    startY = e.touches[0].clientY;
+  }, { passive:true });
+
+  viewport.addEventListener("touchend", (e) => {
+    if(startY == null) return;
+    const endY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : startY;
+    const dy = endY - startY;
+    startY = null;
+    if(Math.abs(dy) < 40) return;
+    advance(dy < 0 ? 1 : -1);
+  }, { passive:true });
+
+  // Desktop wheel / trackpad
+  document.addEventListener("wheel", (e) => {
+    if(wheelLock) return;
+    if(Math.abs(e.deltaY) < 30) return;
+    wheelLock = true;
+    advance(e.deltaY > 0 ? 1 : -1);
+    setTimeout(() => { wheelLock = false; }, 260);
+  }, { passive:true });
+
+  // Keyboard
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "ArrowDown") advance(1);
+    if(e.key === "ArrowUp") advance(-1);
+    if(e.key === " "){ e.preventDefault(); if(!unlocked) unlockAudio(); else togglePause(); }
+  });
+
+  // Load feed
+  fetch("/cubecast/feed.json", { cache:"no-store" })
+    .then(r => r.json())
+    .then(d => {
+      feed = Array.isArray(d.videos) ? d.videos : [];
+      STATE.CTA_AFTER = d.inject_after_swipes || STATE.CTA_AFTER;
+      STATE.CTA_URL = d.cta_url || STATE.CTA_URL;
+
+      idx = 0;
+      sync();
+    })
+    .catch(()=>{});
 })();

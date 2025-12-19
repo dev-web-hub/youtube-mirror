@@ -1,16 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>CUBECAST</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cubecast doomscroll feed." />
-  <link rel="stylesheet" href="/cubecast/cubecast.css" />
+  <link rel="stylesheet" href="/cubecast/cubecast.css"/>
 </head>
 <body>
-  <div class="cb-shell">
-    <div id="cb-stack" class="cb-stack"></div>
+  <div class="frame">
+    <div class="top">CUBECAST</div>
+
+    <div class="viewport" id="viewport">
+      <div id="track">
+        <video data-slot="-2" playsinline muted preload="auto"></video>
+        <video data-slot="-1" playsinline muted preload="auto"></video>
+        <video data-slot="0"  playsinline muted preload="auto"></video>
+        <video data-slot="1"  playsinline muted preload="auto"></video>
+        <video data-slot="2"  playsinline muted preload="auto"></video>
+      </div>
+
+      <!-- transition mask -->
+      <div id="transition-mask"></div>
+
+      <div class="hint">▲ swipe / drag / wheel</div>
+    </div>
   </div>
+
+  <div id="cta"></div>
   <script src="/cubecast/cubecast.js"></script>
 </body>
 </html>
