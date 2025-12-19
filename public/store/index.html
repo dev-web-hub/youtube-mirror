@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DeluxeDeals Store</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{
+      margin:0;
+      font-family:system-ui;
+      background:#fff;
+      color:#111;
+    }
+    .grid{
+      max-width:1200px;
+      margin:0 auto;
+      padding:40px 20px;
+      display:grid;
+      gap:32px;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    }
+    .card{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:20px;
+      background:#fff;
+    }
+    video{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius:12px;
+      background:#000;
+    }
+    h2{margin:14px 0 6px}
+    p{color:#555;font-size:14px}
+    a{
+      display:inline-block;
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#111;
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid">
+
+  <div class="card">
+    <video autoplay muted loop playsinline src="videocta.mp4"></video>
+    <h2>Uploader Pro</h2>
+    <p>Automated Shorts pipeline. Local keys. No SaaS lock-in.</p>
+    <a href="/products/roadmap/">View</a>
+  </div>
+
+  <div class="card">
+    <video autoplay muted loop playsinline src="videocta.mp4"></video>
+    <h2>$49 Payment Setup</h2>
+    <p>Stripe link + intake page, same day.</p>
+    <a href="/products/offer-49/">View</a>
+  </div>
+
+  <div class="card">
+    <video autoplay muted loop playsinline src="videocta.mp4"></video>
+    <h2>XREAL One</h2>
+    <p>Featured AR hardware deal.</p>
+    <a href="/products/xreal-one/">View</a>
+  </div>
+
+</div>
+
+</body>
+</html>
